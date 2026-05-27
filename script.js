@@ -1999,8 +1999,15 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Troll Anti-Copy
+// Troll Anti-Copy with Secret Backdoor
+let isAltPressed = false;
+document.addEventListener('keydown', (e) => { if (e.key === 'Alt') isAltPressed = true; });
+document.addEventListener('keyup', (e) => { if (e.key === 'Alt') isAltPressed = false; });
+
 document.addEventListener('copy', (e) => {
+    // Cửa sau cho Admin: Giữ nút Alt khi ấn Ctrl+C để copy bình thường
+    if (isAltPressed) return;
+
     const readerView = document.getElementById('reader-view');
     if (readerView && readerView.style.display !== 'none') {
         e.preventDefault();
