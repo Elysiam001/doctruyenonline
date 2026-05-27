@@ -408,28 +408,31 @@ function handleRouting() {
                     author: 'Nguồn: Sangtacviet',
                     description: 'Truyện leech bằng Bookmarklet.',
                     cover: 'https://via.placeholder.com/300x400.png?text=' + encodeURIComponent(data.s),
-                    dictionary: []
+                    dictionary: [],
+                    chapters: []
                 };
                 db.stories.push(story);
             } else {
                 storyId = story.id;
+                if (!story.chapters) story.chapters = [];
             }
             
-            db.chapters = db.chapters || [];
-            const existingChap = db.chapters.find(ch => ch.storyId === storyId && ch.title === data.c);
+            const existingChap = story.chapters.find(ch => ch.title === data.c);
             let chapterId;
             if (!existingChap) {
                 chapterId = 'chap_' + Date.now();
                 const formattedContent = data.txt.split('\\n').filter(p => p.trim() !== '').map(p => `<p>${p.trim()}</p>`).join('');
-                const storyChaps = db.chapters.filter(ch => ch.storyId === storyId);
-                const order = storyChaps.length > 0 ? Math.max(...storyChaps.map(ch => ch.order)) + 1 : 1;
+                const order = story.chapters.length > 0 ? Math.max(...story.chapters.map(ch => ch.order || 0)) + 1 : 1;
                 
-                db.chapters.push({
+                const today = new Date();
+                const dateStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+                
+                story.chapters.push({
                     id: chapterId,
-                    storyId: storyId,
                     title: data.c,
                     content: formattedContent,
                     order: order,
+                    publishDate: dateStr,
                     isLocked: false
                 });
             } else {
