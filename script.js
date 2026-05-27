@@ -1,0 +1,1724 @@
+/* ==========================================
+   INITIAL MOCK DATA
+   ========================================== */
+const initialStories = [
+  {
+    id: "dau-pha-thuong-khung",
+    title: "Đấu Phá Thương Khung",
+    author: "Thiên Tằm Thổ Đậu",
+    cover: "covers/dau_pha_thuong_khung.png",
+    description: "Tại đây, không có ma pháp diễm lệ, chỉ có đấu khí sinh sôi đến đỉnh phong! Hãy xem thiếu niên Tiêu Viêm, từ một phế vật tiếng xấu đồn xa, làm thế nào vượt qua gian nan nguy hiểm, từng bước nắm giữ thiên hạ đại quyền, trở thành Đấu Đế chí tôn vạn người ngưỡng vọng!",
+    genres: ["Huyền Huyễn", "Tiên Hiệp", "Dị Giới"],
+    status: "Hoàn thành",
+    views: 124500,
+    likes: 8520,
+    chapters: [
+      {
+        id: "dau-pha-chuong-1",
+        number: 1,
+        title: "Chương 1: Phế vật thiếu niên",
+        content: `“Đấu lực, tam đoạn!”
+
+Nhìn năm chữ to màu đỏ có chút chói mắt trên trắc nghiệm ma thạch bi, thiếu niên mặt không biểu tình, khóe môi nhếch lên một nỗ lực tự giễu tự ti, nắm tay nắm chặt, bởi vì dùng sức quá độ dẫn tới móng tay đâm sâu vào lòng bàn tay, mang lại một trận đau đớn kịch liệt...
+
+“Tiêu Viêm, đấu lực tam đoạn! Cấp biệt: Hạ đẳng!” Bên cạnh trắc nghiệm ma thạch bi, một trung niên nhân liếc nhìn kết quả hiển thị trên bia đá, mặt không biểu tình lớn tiếng tuyên bố.
+
+Trung niên nhân vừa dứt lời, không ngoài dự liệu, trên quảng trường rộng lớn lập tức bộc phát ra một trận xôn xao xen lẫn trào phúng.
+
+“Tam đoạn? Quả nhiên, 'thiên tài' này lại một lần nữa dậm chân tại chỗ.”
+“Haiz, phế vật này thật là làm mất mặt gia tộc.”
+“Nếu không phải phụ thân hắn là tộc trưởng, loại phế vật này sớm đã bị đuổi khỏi gia tộc rồi chứ nói gì được tu luyện tài nguyên.”
+
+Nghe chung quanh truyền đến tiếng trào phúng chế giễu, thiếu niên hít sâu một hơi, lặng lẽ xoay người đi xuống quảng trường. Bóng lưng hắn lộ ra vẻ cô độc và kiên nghị không thuộc về tuổi tác này.`,
+        publishDate: "2026-05-01"
+      },
+      {
+        id: "dau-pha-chuong-2",
+        number: 2,
+        title: "Chương 2: Đấu Khí Đại Lục",
+        content: `Nhớ lại ba năm trước, Tiêu Viêm từng là thiên tài chói sáng nhất của Tiêu gia. Mười một tuổi đột phá Đấu Giả, trở thành người trẻ tuổi nhất trong lịch sử trăm năm qua của gia tộc đạt được thành tựu này.
+
+Thế nhưng, biến cố xảy ra đột ngột. Chỉ trong vòng một đêm, đấu khí tích lũy nhiều năm của hắn bỗng nhiên biến mất vô cớ. Không chỉ ngừng tiến bộ, thực lực của hắn còn không ngừng lùi lại, từ Đấu Giả rớt xuống Đấu Lực tam đoạn.
+
+Suốt ba năm qua, bất kể hắn nỗ lực tu luyện thế nào, đấu khí vừa ngưng tụ ra đều sẽ kỳ lạ biến mất sạch sẽ. Hắn từ một thiên tài được vạn người chú mục, chớp mắt rơi xuống đáy vực trở thành phế vật bị người người khinh bỉ.
+
+Ngồi trên ngọn đồi phía sau gia tộc, Tiêu Viêm ngửa mặt nhìn bầu trời đêm đầy sao, khẽ thở dài:
+“Mẹ, rốt cuộc con đã làm sai điều gì? Tại sao ông trời lại đối xử với con như vậy?”
+
+Đúng lúc này, chiếc nhẫn màu đen cổ phác trên ngón tay hắn bỗng nhiên lóe lên một tia sáng yếu ớt mà hắn không hề phát giác...`,
+        publishDate: "2026-05-02"
+      },
+      {
+        id: "dau-pha-chuong-3",
+        number: 3,
+        title: "Chương 3: Khách không mời mà đến",
+        content: `Sáng hôm sau, Tiêu gia nghênh đón ba vị khách quý. Họ mặc trang phục sang trọng, ngực thêu biểu tượng của Vân Lam Tông - tông phái lớn nhất Gia Mã Đế Quốc.
+
+Đi đầu là một lão giả râu tóc bạc phơ, thái độ kiêu ngạo, theo sau là một nam tử trẻ tuổi và một thiếu nữ xinh đẹp tuyệt trần. Thiếu nữ mặc váy dài màu xanh lá, dung nhan thanh tú như hoa sen mới nở, nhưng ánh mắt lại ẩn chứa sự lạnh lùng và cao ngạo. Nàng chính là Nạp Lan Yên Nhiên, vị hôn thê từ thuở nhỏ của Tiêu Viêm.
+
+Tại đại sảnh tiếp khách, tộc trưởng Tiêu Chiến - phụ thân của Tiêu Viêm, nhiệt tình đón tiếp. Tuy nhiên, bầu không khí nhanh chóng trở nên ngột ngạt khi trưởng lão Vân Lam Tông thẳng thắn bày tỏ ý định:
+
+“Tiêu tộc trưởng, chúng ta đến đây hôm nay là để cầu hôn... à không, chính xác là để giải trừ hôn ước giữa Yên Nhiên và Tiêu Viêm.”
+
+Câu nói vừa thốt ra, cả đại sảnh lập tức yên tĩnh đến đáng sợ. Tiêu Chiến sắc mặt đại biến, bàn tay đặt trên thành ghế đột ngột bóp chặt làm bằng gỗ mun cứng rắn lập tức xuất hiện những vết rạn nứt sâu hoắm.`,
+        publishDate: "2026-05-03"
+      }
+    ]
+  },
+  {
+    id: "than-dao-dan-ton",
+    title: "Thần Đạo Đan Tôn",
+    author: "Cô Đơn Địa Phi",
+    cover: "covers/than_dao_dan_ton.png",
+    description: "Kiếp trước, hắn là tuyệt thế Đan Đế, vì truy cầu võ đạo tối cao mà tạ thế. Kiếp này, hắn sống lại trong thân xác một thiếu niên phế vật, thức tỉnh Thần cấp mạch linh, lấy đan đạo phụ trợ võ đạo, nghiền nát hết thảy thiên tài ngáng đường, ngạo thị thiên hạ!",
+    genres: ["Huyền Huyễn", "Trọng Sinh", "Đan Dược"],
+    status: "Đang ra",
+    views: 89400,
+    likes: 6210,
+    chapters: [
+      {
+        id: "than-dao-chuong-1",
+        number: 1,
+        title: "Chương 1: Đan Đế trùng sinh",
+        content: `Lăng Hàn mở mắt ra, đập vào mắt là một gian phòng gỗ giản dị nhưng sạch sẽ. Hắn xoa xoa cái đầu đau nhức, ký ức như thủy triều tràn vào trong não bộ.
+
+“Ta... thế mà sống lại sao?”
+
+Hắn vốn là Đan Đế danh chấn thiên hạ một vạn năm trước, vì luyện chế một viên đan dược nghịch thiên phá giới mà bị thiên kiếp đánh nát thân xác. Không ngờ linh hồn lại xuyên qua vạn năm thời gian, nhập vào thân xác một thiếu niên mười sáu tuổi cũng tên là Lăng Hàn tại Thương Vân Trấn này.
+
+Thân xác này của Lăng Hàn cực kỳ yếu ớt, kinh mạch bế tắc, là một phế vật võ đạo nổi danh trong trấn. Nhưng đối với cựu Đan Đế mà nói, bế tắc kinh mạch thì có là gì? Hắn có vạn ngàn phương pháp để tẩy tủy phạt cốt, cải tử hoàn sinh.
+
+“Đời này, ta không chỉ đứng đầu Đan đạo, mà còn phải leo lên đỉnh phong Võ đạo, nhìn xem phong cảnh nơi tuyệt lộ!” Lăng Hàn nắm chặt tay, ánh mắt lóe lên phong mang sắc bén.`,
+        publishDate: "2026-05-05"
+      },
+      {
+        id: "than-dao-chuong-2",
+        number: 2,
+        title: "Chương 2: Thần cấp mạch linh",
+        content: `Để bắt đầu tu luyện võ đạo, việc đầu tiên cần làm là câu thông thiên địa để thức tỉnh Mạch Linh. Mạch Linh quyết định tiềm năng tu luyện và thuộc tính sức mạnh của võ giả.
+
+Lăng Hàn ngồi xếp bằng trên giường, vận chuyển một môn công pháp cổ xưa tên là 《 Bất Diệt Thiên Kinh 》 mà kiếp trước hắn đạt được tại một di tích viễn cổ nhưng chưa kịp tu luyện.
+
+Rầm!
+
+Một tiếng nổ vang vọng trong biển thức hải của hắn. Một luồng ánh sáng vàng kim chói mắt bộc phát ra. Giữa vầng sáng ấy, một bóng hình thần bí chậm rãi hiện ra, tản phát ra uy áp khủng khiếp của thái cổ hồng hoang.
+
+“Đây là... Thần cấp Mạch Linh trong truyền thuyết sao? Không, hình như còn vượt qua cả Thần cấp!” Lăng Hàn chấn động kinh ngạc. Mạch Linh này có hình dạng một cái đỉnh đồng ba chân, trên thân khắc đầy đồ đằng cổ xưa của vạn thú chân linh.`,
+        publishDate: "2026-05-06"
+      }
+    ]
+  },
+  {
+    id: "co-vo-tong-tai-kieu-sa",
+    title: "Cô Vợ Tổng Tài Kiêu Sa Của Tôi",
+    author: "Mai Can Thái Thiếu Bính",
+    cover: "covers/co_vo_tong_tai.png",
+    description: "Lâm Phi - một binh vương thế giới ngầm lánh đời, quay về đô thị làm một tên bảo vệ nhỏ nhoi. Trớ trêu thay, hắn lại bị cuốn vào cuộc hôn nhân sắp đặt với nữ tổng tài lạnh lùng kiêu sa của tập đoàn Mộ Thị. Câu chuyện tình yêu dở khóc dở cười và những trận chiến bảo vệ mỹ nhân bắt đầu...",
+    genres: ["Đô Thị", "Ngôn Tình", "Hài Hước", "Bảo Vệ"],
+    status: "Đang ra",
+    views: 245300,
+    likes: 19800,
+    chapters: [
+      {
+        id: "tong-tai-chuong-1",
+        number: 1,
+        title: "Chương 1: Cuộc gặp gỡ định mệnh",
+        content: `Khách sạn Lệ Cảnh năm sao rực rỡ ánh đèn.
+
+Lâm Phi chỉnh lại bộ đồng phục bảo vệ hơi xộc xệch trên người, tựa lưng vào cột đá lớn ngoài sảnh, miệng ngậm một điếu thuốc lá rẻ tiền chưa châm lửa, mắt lười biếng quét qua những chiếc xe sang trọng đang đỗ ngoài sân.
+
+Két!
+
+Một chiếc Rolls-Royce Phantom màu đen sang trọng đỗ ngay trước thảm đỏ. Cửa xe mở ra, một đôi chân dài thon thả mang giày cao gót màu bạc bước xuống, tiếp đó là một bóng hình khiến cả không gian xung quanh như ngừng thở.
+
+Nàng mặc một bộ váy dạ hội màu đen bó sát làm tôn lên đường cong chữ S hoàn hảo, mái tóc đen gợn sóng xõa ngang vai, gương mặt thanh tú không một góc chết nhưng lại phủ một lớp sương giá lạnh lùng. Nàng chính là Mộ Dung Tuyết - tổng tài tập đoàn Mộ Thị, đệ nhất mỹ nhân giới kinh doanh Trung Hải.
+
+Khi nàng bước qua cửa xoay, một gã đàn ông say xỉn bỗng nhiên từ bên cạnh lao tới, tay cầm ly rượu định sàm sỡ nàng. Mộ Dung Tuyết biến sắc, lùi lại nhưng gót giày cao gót đột ngột trượt đi.
+
+Đúng lúc nàng sắp ngã xuống đất, một cánh tay rắn rỏi bỗng từ bên cạnh vươn ra, nhẹ nhàng ôm lấy vòng eo mềm mại của nàng...`,
+        publishDate: "2026-05-10"
+      },
+      {
+        id: "tong-tai-chuong-2",
+        number: 2,
+        title: "Chương 2: Đăng ký kết hôn",
+        content: `Tại văn phòng tổng tài rộng lớn của tòa tháp Mộ Thị.
+
+Mộ Dung Tuyết lạnh lùng nhìn Lâm Phi đang ngồi vắt chân chữ ngũ trên ghế sofa da cao cấp, tay cầm một quả táo cắn rôm rốp không chút e dè lịch sự.
+
+“Đây là thỏa thuận kết hôn trong vòng một năm. Anh ký vào đi.” Nàng đẩy một tập tài liệu mỏng sang phía hắn.
+
+Lâm Phi liếc nhìn tờ giấy, cười cợt nhả:
+“Bà xã à, chúng ta vừa mới gặp nhau có một ngày, cô liền vội vã muốn trói chặt tôi sao? Tôi tuy đẹp trai nhưng cũng là người có nguyên tắc...”
+
+“Ngậm miệng!” Mộ Dung Tuyết đỏ mặt tức giận quát, sau đó lạnh giọng giải thích: “Đây chỉ là kết hôn giả để đối phó với sự ép buộc của gia tộc và các đối thủ kinh doanh. Mỗi tháng tôi sẽ trả cho anh năm mươi vạn phí sinh hoạt. Trong thời gian này, anh phải bảo vệ tôi an toàn và không được có bất kỳ hành vi vượt quá giới hạn nào với tôi.”
+
+“Năm mươi vạn?” Lâm Phi mắt sáng lên, vỗ đùi cái đét: “Ký! Ai từ chối mới là kẻ ngốc!”`,
+        publishDate: "2026-05-11"
+      }
+    ]
+  }
+];
+
+const genresList = [
+  "Huyền Huyễn", "Tiên Hiệp", "Dị Giới", "Trọng Sinh", "Đan Dược", 
+  "Đô Thị", "Ngôn Tình", "Hài Hước", "Bảo Vệ", "Khoa Huyễn", 
+  "Võng Du", "Lịch Sử", "Kiếm Hiệp"
+];
+
+/* ==========================================
+   DATABASE CONTROLLER
+   ========================================== */
+const db = {
+    stories: [],
+    bookmarks: [],
+    history: [],
+    githubConfig: null,
+
+    async init() {
+        // 1. Load GitHub Config
+        const localGH = localStorage.getItem('story_db_github');
+        if (localGH) {
+            this.githubConfig = JSON.parse(localGH);
+        }
+
+        // 2. Load Bookmarks & History
+        this.bookmarks = JSON.parse(localStorage.getItem('story_db_bookmarks')) || [];
+        this.history = JSON.parse(localStorage.getItem('story_db_history')) || [];
+
+        // 3. Load Stories: Try to fetch from remote GitHub repo/server first if running live, or load from localStorage / MockData
+        let loadedFromRemote = false;
+        try {
+            // Fetch stories.json from relative URL (which gets served by GitHub Pages or local server)
+            const res = await fetch('stories.json');
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data) && data.length > 0) {
+                    this.stories = data;
+                    localStorage.setItem('story_db_stories', JSON.stringify(data));
+                    loadedFromRemote = true;
+                    console.log("Successfully loaded database from remote stories.json!");
+                }
+            }
+        } catch (e) {
+            console.log("Could not fetch remote stories.json (expected during first local dev run). Fallback to local storage.");
+        }
+
+        if (!loadedFromRemote) {
+            const localStories = localStorage.getItem('story_db_stories');
+            if (localStories) {
+                this.stories = JSON.parse(localStories);
+            } else {
+                this.stories = initialStories;
+                this.saveLocalOnly();
+            }
+        }
+    },
+
+    saveLocalOnly() {
+        localStorage.setItem('story_db_stories', JSON.stringify(this.stories));
+    },
+
+    async save() {
+        // Save locally first
+        this.saveLocalOnly();
+        
+        // If GitHub sync is configured, push to remote repository
+        if (this.githubConfig && this.githubConfig.token && this.githubConfig.username && this.githubConfig.repo) {
+            showToast("Đang đồng bộ lên GitHub...", "warning");
+            const result = await gitHubSync.push(this.stories);
+            if (result.success) {
+                showToast("Đã đồng bộ thành công lên GitHub!", "success");
+            } else {
+                showToast("Đồng bộ GitHub lỗi: " + result.error, "error");
+            }
+        }
+    },
+
+    saveBookmarks() {
+        localStorage.setItem('story_db_bookmarks', JSON.stringify(this.bookmarks));
+    },
+
+    saveHistory() {
+        localStorage.setItem('story_db_history', JSON.stringify(this.history));
+    },
+
+    toggleBookmark(storyId) {
+        if (this.bookmarks.includes(storyId)) {
+            this.bookmarks = this.bookmarks.filter(id => id !== storyId);
+            showToast("Đã xóa khỏi tủ sách!");
+        } else {
+            this.bookmarks.push(storyId);
+            showToast("Đã thêm vào tủ sách!");
+        }
+        this.saveBookmarks();
+    },
+
+    addReadingHistory(storyId, chapterId) {
+        // Remove existing record for this story
+        this.history = this.history.filter(h => h.storyId !== storyId);
+        // Add to top of list
+        this.history.unshift({
+            storyId,
+            chapterId,
+            timestamp: Date.now()
+        });
+        // Limit to 20 history items
+        this.history = this.history.slice(0, 20);
+        this.saveHistory();
+    }
+};
+
+/* ==========================================
+   GITHUB API SYNC CONTROLLER
+   ========================================== */
+const gitHubSync = {
+    async push(storiesData) {
+        const config = db.githubConfig;
+        if (!config || !config.token) return { success: false, error: 'Chưa cấu hình Token.' };
+
+        const { username, repo, token, branch } = config;
+        const filepath = 'stories.json';
+        const url = `https://api.github.com/repos/${username}/${repo}/contents/${filepath}`;
+
+        try {
+            // 1. Get the existing file's SHA (required by GitHub API to update a file)
+            let sha = "";
+            const getFileRes = await fetch(url + `?ref=${branch}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Accept": "application/vnd.github.v3+json"
+                }
+            });
+
+            if (getFileRes.ok) {
+                const fileData = await getFileRes.json();
+                sha = fileData.sha;
+            }
+
+            // 2. Prepare Base64 content
+            const contentString = JSON.stringify(storiesData, null, 2);
+            // Handle UTF-8 encoding properly in Javascript Base64 conversion
+            const utf8Bytes = new TextEncoder().encode(contentString);
+            // Convert byte array to base64 string using btoa and binary string
+            let binary = "";
+            for (let i = 0; i < utf8Bytes.byteLength; i++) {
+                binary += String.fromCharCode(utf8Bytes[i]);
+            }
+            const base64Content = btoa(binary);
+
+            // 3. Put / Update file on Github
+            const putRes = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                    "Accept": "application/vnd.github.v3+json"
+                },
+                body: JSON.stringify({
+                    message: "Update stories database [skip ci]",
+                    content: base64Content,
+                    sha: sha || undefined, // undefined for new files
+                    branch: branch
+                })
+            });
+
+            if (putRes.ok) {
+                return { success: true };
+            } else {
+                const errData = await putRes.json();
+                return { success: false, error: errData.message || "HTTP Error " + putRes.status };
+            }
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
+    },
+
+    async testConnection(username, repo, token) {
+        const url = `https://api.github.com/repos/${username}/${repo}`;
+        try {
+            const res = await fetch(url, {
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Accept": "application/vnd.github.v3+json"
+                }
+            });
+            if (res.ok) {
+                return { success: true };
+            } else {
+                const errData = await res.json();
+                return { success: false, error: errData.message || "Lỗi phản hồi từ GitHub" };
+            }
+        } catch (e) {
+            return { success: false, error: e.message };
+        }
+    }
+};
+
+/* ==========================================
+   STATIC ROUTER & HASH MANAGER
+   ========================================== */
+function handleRouting() {
+    const hash = window.location.hash || '#home';
+    const parts = hash.split('/');
+    const view = parts[0];
+
+    // Hide all views first
+    document.querySelectorAll('.app-view').forEach(el => el.style.display = 'none');
+    
+    // Deactivate nav links
+    document.querySelectorAll('.nav-link, .drawer-link').forEach(el => el.classList.remove('active'));
+
+    // Handle views
+    if (view === '#home') {
+        document.getElementById('home-view').style.display = 'block';
+        document.getElementById('nav-home').classList.add('active');
+        document.getElementById('drawer-home').classList.add('active');
+        renderHome();
+    } 
+    else if (view === '#story' && parts[1]) {
+        document.getElementById('detail-view').style.display = 'block';
+        renderStoryDetail(parts[1]);
+    } 
+    else if (view === '#reader' && parts[1] && parts[2]) {
+        document.getElementById('reader-view').style.display = 'block';
+        renderReader(parts[1], parts[2]);
+    } 
+    else if (view === '#bookmarks') {
+        document.getElementById('bookmarks-view').style.display = 'block';
+        document.getElementById('nav-bookmarks').classList.add('active');
+        document.getElementById('drawer-bookmarks').classList.add('active');
+        renderBookmarks();
+    } 
+    else if (view === '#admin') {
+        document.getElementById('admin-view').style.display = 'block';
+        document.getElementById('nav-admin').classList.add('active');
+        document.getElementById('drawer-admin').classList.add('active');
+        renderAdmin();
+    } 
+    else {
+        // Fallback
+        window.location.hash = '#home';
+    }
+
+    // Scroll to top on route change
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
+    // Close mobile drawer on navigation
+    closeMobileDrawer();
+}
+
+window.addEventListener('hashchange', handleRouting);
+
+/* ==========================================
+   STATE VARIABLES (FOR FILTERING/ROUTING)
+   ========================================== */
+let currentGenreFilter = "Tất cả";
+let currentStatusFilter = "all"; // all, ongoing, completed
+let chaptersOrderAsc = true;
+let viewSessionViewsCounted = new Set(); // Prevent spamming views count in a single visit
+
+/* ==========================================
+   RENDER CLIENT: HOME VIEW
+   ========================================== */
+function renderHome() {
+    // 1. Spotlight (featured hot story): Display the story with highest views
+    if (db.stories.length > 0) {
+        const sortedByViews = [...db.stories].sort((a, b) => (b.views || 0) - (a.views || 0));
+        const hotStory = sortedByViews[0];
+        
+        document.getElementById('hero-story-title').textContent = hotStory.title;
+        document.getElementById('hero-story-desc').textContent = hotStory.description;
+        document.getElementById('hero-story-author').textContent = hotStory.author;
+        document.getElementById('hero-story-views').textContent = formatViews(hotStory.views);
+        document.getElementById('hero-story-cover').src = hotStory.cover || 'covers/dau_pha_thuong_khung.png';
+        document.getElementById('hero-read-btn').href = `#story/${hotStory.id}`;
+    }
+
+    // 2. Genres Horizontal Scroll Bar
+    const genreContainer = document.getElementById('genre-filter-list');
+    genreContainer.innerHTML = '';
+    
+    const allBtn = document.createElement('button');
+    allBtn.className = `genre-btn ${currentGenreFilter === 'Tất cả' ? 'active' : ''}`;
+    allBtn.textContent = 'Tất cả';
+    allBtn.addEventListener('click', () => {
+        currentGenreFilter = 'Tất cả';
+        renderHomeStoriesGrid();
+        renderHome();
+    });
+    genreContainer.appendChild(allBtn);
+
+    genresList.forEach(genre => {
+        const btn = document.createElement('button');
+        btn.className = `genre-btn ${currentGenreFilter === genre ? 'active' : ''}`;
+        btn.textContent = genre;
+        btn.addEventListener('click', () => {
+            currentGenreFilter = genre;
+            renderHomeStoriesGrid();
+            renderHome();
+        });
+        genreContainer.appendChild(btn);
+    });
+
+    // 3. Render Stories Grid
+    renderHomeStoriesGrid();
+}
+
+function renderHomeStoriesGrid() {
+    const grid = document.getElementById('story-grid-list');
+    grid.innerHTML = '';
+
+    const query = document.getElementById('global-search').value.toLowerCase().trim();
+
+    // Filter stories
+    const filtered = db.stories.filter(story => {
+        const matchesSearch = story.title.toLowerCase().includes(query) || 
+                              story.author.toLowerCase().includes(query);
+        
+        const matchesGenre = currentGenreFilter === 'Tất cả' || 
+                             story.genres.includes(currentGenreFilter);
+        
+        const matchesStatus = currentStatusFilter === 'all' || 
+                              (currentStatusFilter === 'ongoing' && story.status === 'Đang ra') ||
+                              (currentStatusFilter === 'completed' && story.status === 'Hoàn thành');
+
+        return matchesSearch && matchesGenre && matchesStatus;
+    });
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div class="empty-state" style="grid-column: 1 / -1;">
+                <i data-lucide="search-code"></i>
+                <p>Không tìm thấy bộ truyện nào khớp với bộ lọc.</p>
+            </div>
+        `;
+        lucide.createIcons();
+        return;
+    }
+
+    filtered.forEach(story => {
+        const card = document.createElement('div');
+        card.className = 'story-card';
+        card.addEventListener('click', () => {
+            window.location.hash = `#story/${story.id}`;
+        });
+
+        const statusClass = story.status === 'Hoàn thành' ? 'completed' : 'ongoing';
+
+        card.innerHTML = `
+            <div class="card-image-wrapper">
+                <img src="${story.cover || 'covers/dau_pha_thuong_khung.png'}" alt="${story.title}" onerror="this.src='covers/dau_pha_thuong_khung.png'">
+                <span class="card-overlay-badge status-badge ${statusClass}">${story.status}</span>
+            </div>
+            <div class="card-info">
+                <h3 class="card-title">${story.title}</h3>
+                <span class="card-author"><i data-lucide="user"></i> ${story.author}</span>
+                <div class="card-meta-row">
+                    <span class="card-chapters">${story.chapters.length} chương</span>
+                    <div class="card-stats">
+                        <span><i data-lucide="eye"></i> ${formatViews(story.views)}</span>
+                        <span><i data-lucide="heart"></i> ${formatViews(story.likes)}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+
+    lucide.createIcons();
+}
+
+/* ==========================================
+   RENDER CLIENT: STORY DETAIL VIEW
+   ========================================== */
+function renderStoryDetail(storyId) {
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story) {
+        showToast("Không tìm thấy bộ truyện này!", "error");
+        window.location.hash = '#home';
+        return;
+    }
+
+    // Increment views count once per session
+    if (!viewSessionViewsCounted.has(story.id)) {
+        story.views = (story.views || 0) + 1;
+        db.saveLocalOnly(); // Silently save views to localStorage (don't push to GitHub for simple view ticks to avoid API limits)
+        viewSessionViewsCounted.add(story.id);
+    }
+
+    // Cover and title
+    document.getElementById('detail-cover').src = story.cover || 'covers/dau_pha_thuong_khung.png';
+    document.getElementById('detail-cover').alt = story.title;
+    document.getElementById('detail-banner-blur').style.backgroundImage = `url(${story.cover || 'covers/dau_pha_thuong_khung.png'})`;
+    document.getElementById('detail-title').textContent = story.title;
+    document.getElementById('detail-author').textContent = story.author;
+    
+    // Status Badge
+    const statusEl = document.getElementById('detail-status');
+    statusEl.textContent = story.status;
+    statusEl.className = `status-badge ${story.status === 'Hoàn thành' ? 'completed' : 'ongoing'}`;
+
+    // Stats
+    document.getElementById('detail-views').textContent = formatViews(story.views);
+    document.getElementById('detail-likes').textContent = formatViews(story.likes);
+    document.getElementById('detail-chapters-count').textContent = story.chapters.length;
+    document.getElementById('detail-chapters-tab-count').textContent = story.chapters.length;
+
+    // Genres
+    const genresContainer = document.getElementById('detail-genres');
+    genresContainer.innerHTML = '';
+    story.genres.forEach(genre => {
+        const badge = document.createElement('span');
+        badge.className = 'genre-badge';
+        badge.textContent = genre;
+        genresContainer.appendChild(badge);
+    });
+
+    // Description text
+    document.getElementById('detail-description').textContent = story.description;
+
+    // First Chapter Action
+    const firstChapterBtn = document.getElementById('detail-first-chapter-btn');
+    if (story.chapters.length > 0) {
+        firstChapterBtn.disabled = false;
+        // Find chapter with minimum number
+        const sortedChapters = [...story.chapters].sort((a, b) => a.number - b.number);
+        firstChapterBtn.onclick = () => {
+            window.location.hash = `#reader/${story.id}/${sortedChapters[0].id}`;
+        };
+    } else {
+        firstChapterBtn.disabled = true;
+        firstChapterBtn.onclick = null;
+    }
+
+    // Bookmark Toggle State
+    const bookmarkBtn = document.getElementById('detail-bookmark-btn');
+    const updateBookmarkBtnUI = () => {
+        if (db.bookmarks.includes(story.id)) {
+            bookmarkBtn.innerHTML = `<i data-lucide="bookmark-check"></i> Đang Theo Dõi`;
+            bookmarkBtn.className = "btn btn-success";
+        } else {
+            bookmarkBtn.innerHTML = `<i data-lucide="bookmark"></i> Thêm Vào Tủ Sách`;
+            bookmarkBtn.className = "btn btn-secondary";
+        }
+        lucide.createIcons();
+    };
+    updateBookmarkBtnUI();
+    bookmarkBtn.onclick = () => {
+        db.toggleBookmark(story.id);
+        updateBookmarkBtnUI();
+    };
+
+    // Render Chapters List Tab
+    renderDetailChaptersList(story);
+
+    // Toggle Tabs action
+    const tabBtns = document.querySelectorAll('.detail-tab-btn');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const targetTab = btn.getAttribute('data-tab');
+            document.querySelectorAll('.detail-tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`tab-${targetTab}`).classList.add('active');
+        });
+    });
+
+    lucide.createIcons();
+}
+
+function renderDetailChaptersList(story) {
+    const chaptersContainer = document.getElementById('detail-chapters-list');
+    chaptersContainer.innerHTML = '';
+
+    if (story.chapters.length === 0) {
+        chaptersContainer.innerHTML = `<p class="text-muted p-4">Hiện truyện chưa được đăng chương nào. Admin sẽ cập nhật sớm!</p>`;
+        return;
+    }
+
+    // Sort chapters
+    const sorted = [...story.chapters].sort((a, b) => {
+        return chaptersOrderAsc ? a.number - b.number : b.number - a.number;
+    });
+
+    sorted.forEach(ch => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `#reader/${story.id}/${ch.id}`;
+        a.innerHTML = `<i data-lucide="file-text" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:6px;"></i> ${ch.title}`;
+        li.appendChild(a);
+        chaptersContainer.appendChild(li);
+    });
+
+    // Re-bind sort event
+    const sortBtn = document.getElementById('sort-chapters-btn');
+    sortBtn.onclick = () => {
+        chaptersOrderAsc = !chaptersOrderAsc;
+        renderDetailChaptersList(story);
+    };
+
+    lucide.createIcons();
+}
+
+/* ==========================================
+   RENDER CLIENT: READER VIEW
+   ========================================== */
+let readerFontSize = 18; // Default font size in px
+let readerTheme = "dark"; // Default theme
+let readerFontFamily = "sans-serif"; // sans-serif, serif, monospace
+
+function renderReader(storyId, chapterId) {
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story) {
+        showToast("Không tìm thấy bộ truyện!", "error");
+        window.location.hash = '#home';
+        return;
+    }
+
+    const chapter = story.chapters.find(c => c.id === chapterId);
+    if (!chapter) {
+        showToast("Không tìm thấy chương này!", "error");
+        window.location.hash = `#story/${storyId}`;
+        return;
+    }
+
+    // Add to reading history
+    db.addReadingHistory(story.id, chapter.id);
+
+    // Meta links
+    document.getElementById('reader-back-story-link').href = `#story/${story.id}`;
+    document.getElementById('reader-story-title').textContent = story.title;
+    document.getElementById('reader-chapter-title').textContent = chapter.title;
+    document.getElementById('reader-chapter-date').textContent = chapter.publishDate;
+
+    // Body content paragraphs formatting
+    const contentContainer = document.getElementById('reader-body-content');
+    contentContainer.innerHTML = '';
+    
+    // Split content by newline and clean empty items
+    const paragraphs = chapter.content.split(/\n+/).map(p => p.trim()).filter(p => p.length > 0);
+    paragraphs.forEach(p => {
+        const pEl = document.createElement('p');
+        pEl.textContent = p;
+        contentContainer.appendChild(pEl);
+    });
+
+    // Configure theme and font settings
+    applyReaderSettings();
+
+    // Populate Chapter Select Dropdowns (Top and Bottom)
+    const populateChapterSelect = (selectEl) => {
+        selectEl.innerHTML = '';
+        const sortedChapters = [...story.chapters].sort((a,b) => a.number - b.number);
+        sortedChapters.forEach(ch => {
+            const opt = document.createElement('option');
+            opt.value = ch.id;
+            opt.textContent = ch.title;
+            if (ch.id === chapter.id) {
+                opt.selected = true;
+            }
+            selectEl.appendChild(opt);
+        });
+
+        selectEl.onchange = (e) => {
+            window.location.hash = `#reader/${story.id}/${e.target.value}`;
+        };
+    };
+
+    const selectTop = document.getElementById('reader-chapter-select-top');
+    const selectBottom = document.getElementById('reader-chapter-select-bottom');
+    populateChapterSelect(selectTop);
+    populateChapterSelect(selectBottom);
+
+    // Prev / Next Chapter Buttons
+    const sortedChapters = [...story.chapters].sort((a,b) => a.number - b.number);
+    const currentIndex = sortedChapters.findIndex(c => c.id === chapter.id);
+
+    const prevBtns = document.querySelectorAll('.btn-prev-chapter');
+    const nextBtns = document.querySelectorAll('.btn-next-chapter');
+
+    // Setup Previous buttons
+    if (currentIndex > 0) {
+        prevBtns.forEach(btn => {
+            btn.disabled = false;
+            btn.onclick = () => {
+                window.location.hash = `#reader/${story.id}/${sortedChapters[currentIndex - 1].id}`;
+            };
+        });
+    } else {
+        prevBtns.forEach(btn => {
+            btn.disabled = true;
+            btn.onclick = null;
+        });
+    }
+
+    // Setup Next buttons
+    if (currentIndex < sortedChapters.length - 1) {
+        nextBtns.forEach(btn => {
+            btn.disabled = false;
+            btn.onclick = () => {
+                window.location.hash = `#reader/${story.id}/${sortedChapters[currentIndex + 1].id}`;
+            };
+        });
+    } else {
+        nextBtns.forEach(btn => {
+            btn.disabled = true;
+            btn.onclick = null;
+        });
+    }
+
+    lucide.createIcons();
+}
+
+function applyReaderSettings() {
+    // 1. Font size
+    const bodyContent = document.getElementById('reader-body-content');
+    bodyContent.style.fontSize = `${readerFontSize}px`;
+    document.getElementById('font-size-display').textContent = `${readerFontSize}px`;
+
+    // 2. Font Family
+    bodyContent.style.fontFamily = readerFontFamily === 'sans-serif' ? 'var(--font-sans)' 
+                                 : readerFontFamily === 'serif' ? 'var(--font-serif)'
+                                 : 'var(--font-mono)';
+    document.getElementById('font-family-select').value = readerFontFamily;
+
+    // 3. Theme
+    document.body.className = ''; // Reset reader custom theme classes from body
+    document.querySelectorAll('.theme-opt').forEach(opt => opt.classList.remove('active'));
+
+    if (readerTheme === 'sepia') {
+        document.body.classList.add('theme-reader-sepia');
+        document.querySelector('.theme-opt[data-theme="sepia"]').classList.add('active');
+    } else if (readerTheme === 'light') {
+        document.body.classList.add('theme-reader-light');
+        document.querySelector('.theme-opt[data-theme="light"]').classList.add('active');
+    } else {
+        // Dark theme - default website theme
+        document.querySelector('.theme-opt[data-theme="dark"]').classList.add('active');
+    }
+}
+
+// Bind Reader settings UI controls
+document.getElementById('reader-settings-btn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    const panel = document.getElementById('reader-settings-panel');
+    panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+});
+
+// Hide reader panel when clicking outside
+document.addEventListener('click', () => {
+    const panel = document.getElementById('reader-settings-panel');
+    if (panel) panel.style.display = 'none';
+});
+document.getElementById('reader-settings-panel').addEventListener('click', (e) => {
+    e.stopPropagation(); // Avoid closing click event
+});
+
+// Font size buttons
+document.getElementById('font-dec').addEventListener('click', () => {
+    if (readerFontSize > 12) {
+        readerFontSize -= 2;
+        applyReaderSettings();
+    }
+});
+document.getElementById('font-inc').addEventListener('click', () => {
+    if (readerFontSize < 32) {
+        readerFontSize += 2;
+        applyReaderSettings();
+    }
+});
+
+// Font family select
+document.getElementById('font-family-select').addEventListener('change', (e) => {
+    readerFontFamily = e.target.value;
+    applyReaderSettings();
+});
+
+// Theme switches
+document.querySelectorAll('.theme-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+        readerTheme = opt.getAttribute('data-theme');
+        applyReaderSettings();
+    });
+});
+
+/* ==========================================
+   RENDER CLIENT: BOOKMARKS & LIBRARY VIEW
+   ========================================== */
+function renderBookmarks() {
+    // Tab switching inside bookmarks view
+    const tabBtns = document.querySelectorAll('.library-tab-btn');
+    tabBtns.forEach(btn => {
+        btn.onclick = () => {
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const target = btn.getAttribute('data-lib-tab');
+            document.querySelectorAll('.library-tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`lib-tab-${target}`).classList.add('active');
+        };
+    });
+
+    // 1. Render Bookmarks Tab
+    const bookmarkGrid = document.getElementById('bookmark-grid-list');
+    bookmarkGrid.innerHTML = '';
+    
+    const bookmarkedStories = db.stories.filter(s => db.bookmarks.includes(s.id));
+    document.getElementById('bookmark-count').textContent = bookmarkedStories.length;
+
+    if (bookmarkedStories.length === 0) {
+        bookmarkGrid.style.display = 'none';
+        document.getElementById('bookmark-empty').style.display = 'flex';
+    } else {
+        bookmarkGrid.style.display = 'grid';
+        document.getElementById('bookmark-empty').style.display = 'none';
+
+        bookmarkedStories.forEach(story => {
+            const card = document.createElement('div');
+            card.className = 'story-card';
+            card.addEventListener('click', () => {
+                window.location.hash = `#story/${story.id}`;
+            });
+            const statusClass = story.status === 'Hoàn thành' ? 'completed' : 'ongoing';
+
+            card.innerHTML = `
+                <div class="card-image-wrapper">
+                    <img src="${story.cover || 'covers/dau_pha_thuong_khung.png'}" alt="${story.title}">
+                    <span class="card-overlay-badge status-badge ${statusClass}">${story.status}</span>
+                </div>
+                <div class="card-info">
+                    <h3 class="card-title">${story.title}</h3>
+                    <span class="card-author"><i data-lucide="user"></i> ${story.author}</span>
+                    <div class="card-meta-row">
+                        <span class="card-chapters">${story.chapters.length} chương</span>
+                        <div class="card-stats">
+                            <span><i data-lucide="eye"></i> ${formatViews(story.views)}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            bookmarkGrid.appendChild(card);
+        });
+    }
+
+    // 2. Render History Tab
+    const historyContainer = document.getElementById('history-list-container');
+    historyContainer.innerHTML = '';
+
+    if (db.history.length === 0) {
+        historyContainer.style.display = 'none';
+        document.getElementById('history-empty').style.display = 'flex';
+    } else {
+        historyContainer.style.display = 'flex';
+        document.getElementById('history-empty').style.display = 'none';
+
+        db.history.forEach(hist => {
+            const story = db.stories.find(s => s.id === hist.storyId);
+            if (!story) return; // Skip deleted stories
+            
+            const chapter = story.chapters.find(c => c.id === hist.chapterId);
+            const chapterTitle = chapter ? chapter.title : "Chương đã bị xóa";
+
+            const item = document.createElement('div');
+            item.className = 'history-item';
+            
+            item.innerHTML = `
+                <div class="history-item-details">
+                    <img src="${story.cover || 'covers/dau_pha_thuong_khung.png'}" alt="${story.title}" class="history-cover">
+                    <div class="history-info">
+                        <h3>${story.title}</h3>
+                        <p>Đang đọc dở: <strong>${chapterTitle}</strong></p>
+                        <p class="text-muted" style="margin-top:4px;font-size:0.75rem;"><i data-lucide="clock" style="width:12px;height:12px;display:inline-block;vertical-align:middle;margin-right:3px;"></i> ${formatTimeAgo(hist.timestamp)}</p>
+                    </div>
+                </div>
+                <div class="history-item-actions">
+                    <a href="#reader/${story.id}/${hist.chapterId}" class="btn btn-primary btn-sm"><i data-lucide="book-open"></i> Đọc tiếp</a>
+                    <button class="btn btn-secondary btn-icon-only btn-sm remove-history-btn" data-story-id="${story.id}"><i data-lucide="trash-2"></i></button>
+                </div>
+            `;
+
+            // Delete history item event
+            item.querySelector('.remove-history-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                db.history = db.history.filter(h => h.storyId !== story.id);
+                db.saveHistory();
+                renderBookmarks(); // Re-render
+                showToast("Đã xóa lịch sử đọc truyện!");
+            });
+
+            historyContainer.appendChild(item);
+        });
+    }
+
+    lucide.createIcons();
+}
+
+/* ==========================================
+   RENDER ADMIN: OVERVIEW, STORIES & CHAPTERS CRUD
+   ========================================== */
+function renderAdmin() {
+    // Show/hide Sync Warning status
+    const banner = document.getElementById('github-status-banner');
+    if (db.githubConfig && db.githubConfig.token) {
+        banner.className = "github-sync-indicator alert-box alert-warning";
+        banner.style.borderColor = "rgba(16, 185, 129, 0.3)";
+        banner.style.backgroundColor = "rgba(16, 185, 129, 0.1)";
+        banner.style.color = "hsl(142, 70%, 75%)";
+        banner.innerHTML = `<i data-lucide="check-circle" class="text-success"></i> 
+            <div><strong>Đã kết nối GitHub:</strong> Các cập nhật chỉnh sửa sẽ được đẩy trực tiếp lên kho chứa <code>${db.githubConfig.username}/${db.githubConfig.repo}</code> online.</div>`;
+    } else {
+        banner.className = "github-sync-indicator alert-box alert-warning";
+        banner.style.borderColor = "";
+        banner.style.backgroundColor = "";
+        banner.style.color = "";
+        banner.innerHTML = `<i data-lucide="alert-circle"></i> 
+            <div><strong>Giao diện chạy cục bộ (Chưa cấu hình GitHub):</strong> Mọi thay đổi của bạn hiện chỉ lưu trên trình duyệt của máy này. Hãy cấu hình GitHub để cập nhật trực tiếp lên trang web online cho mọi người cùng xem!</div>`;
+    }
+
+    // Bind Admin Sub-tabs switching
+    const subTabBtns = document.querySelectorAll('.admin-tab-btn');
+    subTabBtns.forEach(btn => {
+        btn.onclick = () => {
+            subTabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const target = btn.getAttribute('data-admin-tab');
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`admin-tab-${target}`).classList.add('active');
+            
+            if (target === 'dashboard') renderAdminDashboard();
+            if (target === 'stories') renderAdminStoriesList();
+            if (target === 'chapters') renderAdminChaptersSelector();
+            if (target === 'github') renderAdminGithubConfig();
+        };
+    });
+
+    // Run active sub-tab renderer
+    const activeSubTab = document.querySelector('.admin-tab-btn.active').getAttribute('data-admin-tab');
+    if (activeSubTab === 'dashboard') renderAdminDashboard();
+    if (activeSubTab === 'stories') renderAdminStoriesList();
+    if (activeSubTab === 'chapters') renderAdminChaptersSelector();
+    if (activeSubTab === 'github') renderAdminGithubConfig();
+
+    lucide.createIcons();
+}
+
+/* Sub-Tab 1: Dashboard Stats Overview */
+function renderAdminDashboard() {
+    let totalChapters = 0;
+    let totalViews = 0;
+    let totalLikes = 0;
+
+    db.stories.forEach(story => {
+        totalChapters += story.chapters.length;
+        totalViews += (story.views || 0);
+        totalLikes += (story.likes || 0);
+    });
+
+    document.getElementById('admin-total-stories').textContent = db.stories.length;
+    document.getElementById('admin-total-chapters').textContent = totalChapters;
+    document.getElementById('admin-total-views').textContent = formatViews(totalViews);
+    document.getElementById('admin-total-likes').textContent = formatViews(totalLikes);
+
+    // Latest stories table
+    const tableBody = document.getElementById('admin-dashboard-latest-table');
+    tableBody.innerHTML = '';
+
+    const latest = [...db.stories].slice(0, 5); // take first 5
+    if (latest.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Chưa có bộ truyện nào.</td></tr>`;
+        return;
+    }
+
+    latest.forEach(story => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><img src="${story.cover || 'covers/dau_pha_thuong_khung.png'}" width="36" height="50" style="object-fit:cover;"></td>
+            <td class="font-semibold">${story.title}</td>
+            <td>${story.author}</td>
+            <td><span class="status-badge ${story.status === 'Hoàn thành' ? 'completed' : 'ongoing'}">${story.status}</span></td>
+            <td>${story.chapters.length}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+}
+
+/* Sub-Tab 2: Stories Management Table */
+function renderAdminStoriesList() {
+    const tableBody = document.getElementById('admin-stories-table-body');
+    tableBody.innerHTML = '';
+
+    const query = document.getElementById('admin-story-search').value.toLowerCase().trim();
+
+    const filtered = db.stories.filter(story => {
+        return story.title.toLowerCase().includes(query) || story.author.toLowerCase().includes(query);
+    });
+
+    if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="7" class="text-center text-muted">Không tìm thấy truyện nào.</td></tr>`;
+        return;
+    }
+
+    filtered.forEach(story => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><img src="${story.cover || 'covers/dau_pha_thuong_khung.png'}" width="40" height="58" onerror="this.src='covers/dau_pha_thuong_khung.png'"></td>
+            <td class="font-semibold">${story.title}</td>
+            <td>${story.author}</td>
+            <td>
+                <div style="display:flex;flex-wrap:wrap;gap:4px;max-width:200px;">
+                    ${story.genres.map(g => `<span class="genre-badge" style="font-size:0.75rem;padding:2px 6px;">${g}</span>`).join('')}
+                </div>
+            </td>
+            <td><span class="status-badge ${story.status === 'Hoàn thành' ? 'completed' : 'ongoing'}">${story.status}</span></td>
+            <td>${formatViews(story.views)}</td>
+            <td>
+                <div class="actions">
+                    <button class="btn btn-secondary btn-sm btn-icon-only edit-story-btn" data-id="${story.id}" title="Sửa truyện"><i data-lucide="edit-3"></i></button>
+                    <button class="btn btn-danger btn-sm btn-icon-only delete-story-btn" data-id="${story.id}" title="Xóa truyện"><i data-lucide="trash-2"></i></button>
+                </div>
+            </td>
+        `;
+
+        // Bind Actions
+        tr.querySelector('.edit-story-btn').onclick = () => openStoryModal(story);
+        tr.querySelector('.delete-story-btn').onclick = () => confirmDeleteStory(story.id, story.title);
+
+        tableBody.appendChild(tr);
+    });
+
+    lucide.createIcons();
+}
+
+// Bind story search keyup
+document.getElementById('admin-story-search').addEventListener('keyup', renderAdminStoriesList);
+
+/* Sub-Tab 3: Chapters Management Table and Selectors */
+function renderAdminChaptersSelector() {
+    const selector = document.getElementById('admin-select-story-for-chapters');
+    selector.innerHTML = `<option value="">-- Chọn truyện --</option>`;
+    
+    // Sort stories alphabetically
+    const sortedStories = [...db.stories].sort((a,b) => a.title.localeCompare(b.title, 'vi'));
+    
+    sortedStories.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = `${s.title} (${s.chapters.length} chương)`;
+        selector.appendChild(opt);
+    });
+
+    // Handle story selection
+    selector.onchange = (e) => {
+        const storyId = e.target.value;
+        const chaptersContentBox = document.getElementById('admin-chapters-content-box');
+        
+        if (!storyId) {
+            chaptersContentBox.style.display = 'none';
+            return;
+        }
+
+        const story = db.stories.find(s => s.id === storyId);
+        document.getElementById('admin-chapter-selected-story-name').textContent = story.title;
+        chaptersContentBox.style.display = 'block';
+
+        renderAdminChaptersList(story);
+    };
+}
+
+function renderAdminChaptersList(story) {
+    const tableBody = document.getElementById('admin-chapters-table-body');
+    tableBody.innerHTML = '';
+
+    if (story.chapters.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Truyện này chưa có chương nào. Hãy nhấn "Thêm chương mới" để bắt đầu!</td></tr>`;
+        return;
+    }
+
+    // Sort chapters ascending
+    const sortedChapters = [...story.chapters].sort((a,b) => a.number - b.number);
+
+    sortedChapters.forEach(ch => {
+        const wordCount = ch.content.split(/\s+/).filter(w => w.length > 0).length;
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="font-semibold text-center">Chương ${ch.number}</td>
+            <td>${ch.title}</td>
+            <td>${ch.publishDate}</td>
+            <td>~${wordCount.toLocaleString('vi-VN')} từ</td>
+            <td>
+                <div class="actions">
+                    <button class="btn btn-secondary btn-sm btn-icon-only edit-chapter-btn" title="Sửa chương"><i data-lucide="edit-3"></i></button>
+                    <button class="btn btn-danger btn-sm btn-icon-only delete-chapter-btn" title="Xóa chương"><i data-lucide="trash-2"></i></button>
+                </div>
+            </td>
+        `;
+
+        tr.querySelector('.edit-chapter-btn').onclick = () => openChapterModal(story.id, ch);
+        tr.querySelector('.delete-chapter-btn').onclick = () => confirmDeleteChapter(story.id, ch.id, ch.title);
+
+        tableBody.appendChild(tr);
+    });
+
+    lucide.createIcons();
+}
+
+/* Sub-Tab 4: GitHub Config form values load */
+function renderAdminGithubConfig() {
+    const config = db.githubConfig || { username: '', repo: '', token: '', branch: 'main' };
+    
+    document.getElementById('gh-username').value = config.username;
+    document.getElementById('gh-repo').value = config.repo;
+    document.getElementById('gh-token').value = config.token;
+    document.getElementById('gh-branch').value = config.branch;
+}
+
+/* ==========================================
+   ADMIN ACTIONS: STORY MODAL & SUBMIT
+   ========================================== */
+const storyModal = document.getElementById('story-modal');
+
+// Load genres choices in modal form
+function loadGenresCheckboxes() {
+    const grid = document.getElementById('form-story-genres-grid');
+    grid.innerHTML = '';
+    genresList.forEach(genre => {
+        const label = document.createElement('label');
+        label.className = 'checkbox-lbl';
+        label.innerHTML = `<input type="checkbox" name="genres" value="${genre}"> ${genre}`;
+        grid.appendChild(label);
+    });
+}
+
+function openStoryModal(story = null) {
+    loadGenresCheckboxes();
+    const titleEl = document.getElementById('story-modal-title');
+    const submitEl = document.getElementById('story-modal-submit-btn');
+    const form = document.getElementById('story-form');
+    
+    form.reset();
+
+    if (story) {
+        // Edit Mode
+        titleEl.textContent = `Chỉnh sửa: ${story.title}`;
+        submitEl.innerHTML = `<i data-lucide="save"></i> Cập Nhật Truyện`;
+        document.getElementById('form-story-id').value = story.id;
+        document.getElementById('form-story-title').value = story.title;
+        document.getElementById('form-story-author').value = story.author;
+        document.getElementById('form-story-status').value = story.status;
+        document.getElementById('form-story-cover').value = story.cover;
+        document.getElementById('form-story-description').value = story.description;
+
+        // Check the genres checkboxes
+        const checkboxes = form.querySelectorAll('input[name="genres"]');
+        checkboxes.forEach(box => {
+            if (story.genres.includes(box.value)) {
+                box.checked = true;
+            }
+        });
+    } else {
+        // Add Mode
+        titleEl.textContent = `Thêm Truyện Mới`;
+        submitEl.innerHTML = `<i data-lucide="plus"></i> Lưu Truyện`;
+        document.getElementById('form-story-id').value = "";
+    }
+
+    storyModal.classList.add('open');
+    lucide.createIcons();
+}
+
+function closeStoryModal() {
+    storyModal.classList.remove('open');
+}
+
+// Bind preset cover buttons click
+document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.onclick = () => {
+        const path = btn.getAttribute('data-preset');
+        document.getElementById('form-story-cover').value = path;
+    };
+});
+
+// Bind modals cancel/close buttons
+document.getElementById('story-modal-close-btn').onclick = closeStoryModal;
+document.getElementById('story-modal-cancel-btn').onclick = closeStoryModal;
+document.getElementById('admin-add-story-btn').onclick = () => openStoryModal();
+
+// Handle Story Form Submission
+document.getElementById('story-form').onsubmit = async (e) => {
+    e.preventDefault();
+    
+    const storyId = document.getElementById('form-story-id').value;
+    const title = document.getElementById('form-story-title').value.trim();
+    const author = document.getElementById('form-story-author').value.trim();
+    const status = document.getElementById('form-story-status').value;
+    const cover = document.getElementById('form-story-cover').value.trim();
+    const description = document.getElementById('form-story-description').value.trim();
+
+    // Collect checked genres
+    const genres = [];
+    document.querySelectorAll('input[name="genres"]:checked').forEach(box => {
+        genres.push(box.value);
+    });
+
+    if (genres.length === 0) {
+        showToast("Vui lòng chọn ít nhất một thể loại!", "error");
+        return;
+    }
+
+    const storyData = { title, author, status, cover, description, genres };
+
+    if (storyId) {
+        // Edit existing story
+        const storyIdx = db.stories.findIndex(s => s.id === storyId);
+        if (storyIdx !== -1) {
+            db.stories[storyIdx] = { ...db.stories[storyIdx], ...storyData };
+            closeStoryModal();
+            showToast("Đã cập nhật thông tin truyện!");
+            await db.save();
+            renderAdminStoriesList();
+        }
+    } else {
+        // Add new story
+        // Helper slug creator
+        const slug = title.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/đ/g, "d")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)+/g, "");
+        
+        // Prevent duplicate slugs
+        let finalSlug = slug;
+        let counter = 1;
+        while (db.stories.some(s => s.id === finalSlug)) {
+            finalSlug = `${slug}-${counter}`;
+            counter++;
+        }
+
+        const newStory = {
+            id: finalSlug,
+            ...storyData,
+            views: 0,
+            likes: 0,
+            chapters: []
+        };
+
+        db.stories.unshift(newStory);
+        closeStoryModal();
+        showToast("Đăng truyện mới thành công!");
+        await db.save();
+        renderAdminStoriesList();
+    }
+};
+
+/* ==========================================
+   ADMIN ACTIONS: CHAPTER MODAL & SUBMIT
+   ========================================== */
+const chapterModal = document.getElementById('chapter-modal');
+
+function openChapterModal(storyId, chapter = null) {
+    const titleEl = document.getElementById('chapter-modal-title');
+    const submitEl = document.getElementById('chapter-modal-submit-btn');
+    const form = document.getElementById('chapter-form');
+    const story = db.stories.find(s => s.id === storyId);
+
+    form.reset();
+    document.getElementById('form-chapter-id').value = chapter ? chapter.id : '';
+
+    if (chapter) {
+        // Edit mode
+        titleEl.textContent = `Sửa Chương: ${chapter.title}`;
+        submitEl.innerHTML = `<i data-lucide="save"></i> Cập Nhật Chương`;
+        document.getElementById('form-chapter-number').value = chapter.number;
+        document.getElementById('form-chapter-title').value = chapter.title.replace(/^Chương \d+:\s*/, '');
+        document.getElementById('form-chapter-content').value = chapter.content;
+    } else {
+        // Add mode
+        const nextNumber = story.chapters.length > 0 
+            ? Math.max(...story.chapters.map(c => c.number || 0)) + 1 
+            : 1;
+        titleEl.textContent = `Thêm Chương Mới - ${story.title}`;
+        submitEl.innerHTML = `<i data-lucide="plus"></i> Lưu Chương`;
+        document.getElementById('form-chapter-number').value = nextNumber;
+    }
+
+    chapterModal.classList.add('open');
+    lucide.createIcons();
+}
+
+function closeChapterModal() {
+    chapterModal.classList.remove('open');
+}
+
+// Bind close buttons
+document.getElementById('chapter-modal-close-btn').onclick = closeChapterModal;
+document.getElementById('chapter-modal-cancel-btn').onclick = closeChapterModal;
+document.getElementById('admin-add-chapter-btn').onclick = () => {
+    const storyId = document.getElementById('admin-select-story-for-chapters').value;
+    if (storyId) openChapterModal(storyId);
+};
+
+// Handle Chapter Form Submission
+document.getElementById('chapter-form').onsubmit = async (e) => {
+    e.preventDefault();
+
+    const storyId = document.getElementById('admin-select-story-for-chapters').value;
+    const chapterId = document.getElementById('form-chapter-id').value;
+    const num = parseInt(document.getElementById('form-chapter-number').value);
+    const subTitle = document.getElementById('form-chapter-title').value.trim();
+    const content = document.getElementById('form-chapter-content').value.trim();
+
+    const fullTitle = `Chương ${num}: ${subTitle}`;
+
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story) return;
+
+    if (chapterId) {
+        // Edit existing chapter
+        const chIdx = story.chapters.findIndex(c => c.id === chapterId);
+        if (chIdx !== -1) {
+            story.chapters[chIdx] = {
+                ...story.chapters[chIdx],
+                title: fullTitle,
+                content: content
+            };
+            closeChapterModal();
+            showToast("Đã lưu chương chỉnh sửa!");
+            await db.save();
+            renderAdminChaptersList(story);
+        }
+    } else {
+        // Create new chapter
+        const newChapter = {
+            id: `${storyId}-chuong-${num}`,
+            number: num,
+            title: fullTitle,
+            content: content,
+            publishDate: new Date().toISOString().split('T')[0]
+        };
+
+        story.chapters.push(newChapter);
+        closeChapterModal();
+        showToast("Đăng chương mới thành công!");
+        await db.save();
+        renderAdminChaptersList(story);
+    }
+};
+
+/* ==========================================
+   ADMIN ACTIONS: GITHUB SYNC SUBMIT
+   ========================================== */
+document.getElementById('github-config-form').onsubmit = (e) => {
+    e.preventDefault();
+    
+    const username = document.getElementById('gh-username').value.trim();
+    const repo = document.getElementById('gh-repo').value.trim();
+    const token = document.getElementById('gh-token').value.trim();
+    const branch = document.getElementById('gh-branch').value.trim();
+
+    if (!username || !repo || !token) {
+        showToast("Vui lòng điền đầy đủ Username, Repo và Token!", "error");
+        return;
+    }
+
+    db.githubConfig = { username, repo, token, branch };
+    localStorage.setItem('story_db_github', JSON.stringify(db.githubConfig));
+    
+    showToast("Cấu hình GitHub đã được lưu cục bộ!");
+    renderAdmin(); // Re-render overview to update badges
+};
+
+document.getElementById('github-test-btn').onclick = async () => {
+    const username = document.getElementById('gh-username').value.trim();
+    const repo = document.getElementById('gh-repo').value.trim();
+    const token = document.getElementById('gh-token').value.trim();
+
+    if (!username || !repo || !token) {
+        showToast("Vui lòng điền đủ thông tin trước khi kiểm tra!", "warning");
+        return;
+    }
+
+    showToast("Đang kiểm tra kết nối...", "warning");
+    const result = await gitHubSync.testConnection(username, repo, token);
+    
+    if (result.success) {
+        showToast("Kết nối thành công đến Repository GitHub!", "success");
+    } else {
+        showToast("Kết nối thất bại: " + result.error, "error");
+    }
+};
+
+/* ==========================================
+   ADMIN ACTIONS: BACKUP / JSON DOWNLOAD / RESET
+   ========================================== */
+// Export download file JSON
+document.getElementById('admin-export-btn').onclick = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db.stories, null, 2));
+    const downloadAnchor = document.createElement('a');
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "stories.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    downloadAnchor.remove();
+    showToast("Đã tải về tệp tin stories.json!");
+};
+
+// Import file file trigger
+const fileInput = document.getElementById('admin-import-file');
+const filenameLabel = document.getElementById('import-filename');
+const importBtn = document.getElementById('admin-import-btn');
+
+fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        filenameLabel.textContent = file.name;
+        importBtn.disabled = false;
+    } else {
+        filenameLabel.textContent = "Chưa chọn file";
+        importBtn.disabled = true;
+    }
+};
+
+// Import button action
+importBtn.onclick = () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+        try {
+            const data = JSON.parse(event.target.result);
+            if (Array.isArray(data)) {
+                // Basic validation
+                const isValid = data.every(story => 
+                    story.title && story.author && story.id && Array.isArray(story.chapters)
+                );
+                
+                if (isValid) {
+                    db.stories = data;
+                    await db.save();
+                    showToast("Khôi phục dữ liệu từ JSON thành công!");
+                    
+                    // Reset input
+                    fileInput.value = "";
+                    filenameLabel.textContent = "Chưa chọn file";
+                    importBtn.disabled = true;
+
+                    // Re-render
+                    renderAdmin();
+                } else {
+                    showToast("Định dạng file stories.json không đúng chuẩn!", "error");
+                }
+            } else {
+                showToast("File JSON phải chứa mảng danh sách truyện!", "error");
+            }
+        } catch (e) {
+            showToast("Lỗi đọc file JSON: " + e.message, "error");
+        }
+    };
+    reader.readAsText(file);
+};
+
+// Reset database warning popup
+document.getElementById('admin-reset-btn').onclick = () => {
+    openConfirmModal(
+        "Bạn có chắc muốn khôi phục dữ liệu về mặc định không? Tất cả truyện tự đăng và chỉnh sửa của bạn trên trình duyệt này sẽ bị xóa bỏ hoàn toàn.",
+        async () => {
+            db.stories = initialStories;
+            db.bookmarks = [];
+            db.history = [];
+            localStorage.removeItem('story_db_github');
+            db.githubConfig = null;
+
+            localStorage.setItem('story_db_stories', JSON.stringify(initialStories));
+            db.saveBookmarks();
+            db.saveHistory();
+            
+            showToast("Đã khôi phục dữ liệu mặc định!");
+            renderAdmin();
+        }
+    );
+};
+
+/* ==========================================
+   CONFIRMATION MODAL & SYSTEM OVERLAYS
+   ========================================== */
+const confirmModal = document.getElementById('confirm-modal');
+let confirmModalCallback = null;
+
+function openConfirmModal(message, callback) {
+    document.getElementById('confirm-modal-message').textContent = message;
+    confirmModalCallback = callback;
+    confirmModal.classList.add('open');
+}
+
+function closeConfirmModal() {
+    confirmModal.classList.remove('open');
+    confirmModalCallback = null;
+}
+
+document.getElementById('confirm-modal-confirm-btn').onclick = () => {
+    if (confirmModalCallback) {
+        confirmModalCallback();
+    }
+    closeConfirmModal();
+};
+
+document.getElementById('confirm-modal-close-btn').onclick = closeConfirmModal;
+document.getElementById('confirm-modal-cancel-btn').onclick = closeConfirmModal;
+
+// Quick delete helpers
+function confirmDeleteStory(storyId, storyTitle) {
+    openConfirmModal(
+        `Bạn có chắc chắn muốn xóa bộ truyện "${storyTitle}" không? Tất cả các chương liên quan cũng sẽ bị xóa bỏ vĩnh viễn.`,
+        async () => {
+            db.stories = db.stories.filter(s => s.id !== storyId);
+            db.bookmarks = db.bookmarks.filter(id => id !== storyId);
+            db.history = db.history.filter(h => h.storyId !== storyId);
+            
+            db.saveBookmarks();
+            db.saveHistory();
+            showToast("Đã xóa bộ truyện!");
+            await db.save();
+            renderAdminStoriesList();
+        }
+    );
+}
+
+function confirmDeleteChapter(storyId, chapterId, chapterTitle) {
+    openConfirmModal(
+        `Bạn có chắc chắn muốn xóa chương "${chapterTitle}" không?`,
+        async () => {
+            const story = db.stories.find(s => s.id === storyId);
+            if (story) {
+                story.chapters = story.chapters.filter(c => c.id !== chapterId);
+                // Re-sort and re-number chapters sequentially
+                story.chapters.sort((a,b) => a.number - b.number);
+                story.chapters.forEach((c, idx) => {
+                    c.number = idx + 1;
+                    // Replace the start of the title to match the new number
+                    c.title = c.title.replace(/^Chương \d+:/, `Chương ${c.number}:`);
+                });
+
+                db.history = db.history.filter(h => h.chapterId !== chapterId);
+                db.saveHistory();
+                showToast("Đã xóa chương truyện!");
+                await db.save();
+                renderAdminChaptersList(story);
+            }
+        }
+    );
+}
+
+/* ==========================================
+   UTILITY HELPER FUNCTIONS
+   ========================================== */
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    let iconName = 'check';
+    if (type === 'error') iconName = 'x-circle';
+    if (type === 'warning') iconName = 'alert-triangle';
+
+    toast.innerHTML = `<i data-lucide="${iconName}"></i> <span>${message}</span>`;
+    container.appendChild(toast);
+    lucide.createIcons();
+
+    // Trigger animation in CSS through creation, then remove
+    setTimeout(() => {
+        toast.style.animation = 'toast-in 0.3s reverse forwards';
+        setTimeout(() => toast.remove(), 300);
+    }, 3500);
+}
+
+function formatViews(num) {
+    if (!num) return 0;
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1) + 'M';
+    }
+    if (num >= 1000) {
+        return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toLocaleString('vi-VN');
+}
+
+function formatTimeAgo(timestamp) {
+    const diff = Date.now() - timestamp;
+    const mins = Math.floor(diff / 60000);
+    const hrs = Math.floor(mins / 60);
+    const days = Math.floor(hrs / 24);
+
+    if (days > 0) return `${days} ngày trước`;
+    if (hrs > 0) return `${hrs} giờ trước`;
+    if (mins > 0) return `${mins} phút trước`;
+    return 'Vừa xong';
+}
+
+/* ==========================================
+   GLOBAL ACTIONS & SEARCH HANDLERS
+   ========================================== */
+// Dynamic search binding
+const searchInput = document.getElementById('global-search');
+const clearSearchBtn = document.getElementById('clear-search');
+
+searchInput.addEventListener('input', () => {
+    const val = searchInput.value.trim();
+    if (val) {
+        clearSearchBtn.style.display = 'block';
+    } else {
+        clearSearchBtn.style.display = 'none';
+    }
+    // Update active view grid if on Home or Bookmarks
+    const hash = window.location.hash || '#home';
+    if (hash.startsWith('#home')) {
+        renderHomeStoriesGrid();
+    }
+});
+
+clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    clearSearchBtn.style.display = 'none';
+    const hash = window.location.hash || '#home';
+    if (hash.startsWith('#home')) {
+        renderHomeStoriesGrid();
+    }
+});
+
+/* Mobile Menu / Drawer controls */
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const closeDrawerBtn = document.getElementById('close-drawer');
+const drawer = document.getElementById('mobile-drawer');
+const overlay = document.getElementById('drawer-overlay');
+
+function openMobileDrawer() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+}
+
+function closeMobileDrawer() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+}
+
+mobileMenuBtn.addEventListener('click', openMobileDrawer);
+closeDrawerBtn.addEventListener('click', closeMobileDrawer);
+overlay.addEventListener('click', closeMobileDrawer);
+
+/* ==========================================
+   INITIALIZATION
+   ========================================== */
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Initialise database
+    await db.init();
+    
+    // 2. Initialise icons
+    lucide.createIcons();
+
+    // 3. Start routing
+    handleRouting();
+});

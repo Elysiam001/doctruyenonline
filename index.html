@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chữ Việt Book - Web Đọc Truyện Premium</title>
+    <meta name="description" content="Trang web đọc truyện chữ online miễn phí chất lượng cao. Đa dạng thể loại: Tiên Hiệp, Huyền Huyễn, Đô Thị, Ngôn Tình. Giao diện đẹp, mượt mà, tối ưu cho di động.">
+    <!-- Google Fonts: Outfit and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- App Background Glows -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#home" class="logo">
+                <span class="logo-icon"><i data-lucide="book-open"></i></span>
+                <span class="logo-text">ChữViệt<span>Book</span></span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#home" class="nav-link active" id="nav-home"><i data-lucide="home"></i> Trang Chủ</a>
+                <a href="#bookmarks" class="nav-link" id="nav-bookmarks"><i data-lucide="bookmark"></i> Tủ Sách</a>
+                <a href="#admin" class="nav-link btn-admin" id="nav-admin"><i data-lucide="shield-check"></i> Admin</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="global-search" placeholder="Tìm truyện, tác giả...">
+                    <button class="clear-search-btn" id="clear-search" style="display:none;"><i data-lucide="x"></i></button>
+                </div>
+                <button class="mobile-menu-toggle" id="mobile-menu-btn">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <div class="logo">
+                <span class="logo-icon"><i data-lucide="book-open"></i></span>
+                <span class="logo-text">ChữViệt<span>Book</span></span>
+            </div>
+            <button class="close-drawer-btn" id="close-drawer"><i data-lucide="x"></i></button>
+        </div>
+        <nav class="drawer-links">
+            <a href="#home" class="drawer-link active" id="drawer-home"><i data-lucide="home"></i> Trang Chủ</a>
+            <a href="#bookmarks" class="drawer-link" id="drawer-bookmarks"><i data-lucide="bookmark"></i> Tủ Sách của tôi</a>
+            <a href="#admin" class="drawer-link btn-admin-mobile" id="drawer-admin"><i data-lucide="shield-check"></i> Trang Admin</a>
+        </nav>
+    </div>
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+        <!-- HOME VIEW -->
+        <section id="home-view" class="app-view">
+            <!-- Hero Spotlight -->
+            <div class="hero-spotlight">
+                <div class="hero-content">
+                    <span class="badge">TRUYỆN HOT CẬP NHẬT</span>
+                    <h1 class="hero-title" id="hero-story-title">Đấu Phá Thương Khung</h1>
+                    <p class="hero-desc" id="hero-story-desc">Tại đây, không có ma pháp diễm lệ, chỉ có đấu khí sinh sôi đến đỉnh phong! Thiếu niên Tiêu Viêm vượt qua phế vật tiếng xấu đồn xa...</p>
+                    <div class="hero-meta">
+                        <span><i data-lucide="user"></i> <span id="hero-story-author">Thiên Tằm Thổ Đậu</span></span>
+                        <span><i data-lucide="eye"></i> <span id="hero-story-views">124.5K</span> lượt xem</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#story/dau-pha-thuong-khung" class="btn btn-primary" id="hero-read-btn"><i data-lucide="play"></i> Đọc Ngay</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="covers/dau_pha_thuong_khung.png" alt="Đấu Phá Thương Khung" id="hero-story-cover">
+                </div>
+            </div>
+
+            <!-- Categories / Genres Selector -->
+            <div class="genre-bar-container">
+                <h3 class="section-title"><i data-lucide="tags"></i> Khám Phá Thể Loại</h3>
+                <div class="genre-scroll" id="genre-filter-list">
+                    <!-- Genres injected by JS -->
+                </div>
+            </div>
+
+            <!-- Story Grid -->
+            <div class="story-grid-header">
+                <h2 class="section-title"><i data-lucide="layout-grid"></i> Danh Sách Truyện</h2>
+                <div class="grid-filter-options">
+                    <button class="filter-tab active" data-filter="all">Tất cả</button>
+                    <button class="filter-tab" data-filter="ongoing">Đang ra</button>
+                    <button class="filter-tab" data-filter="completed">Hoàn thành</button>
+                </div>
+            </div>
+            <div class="story-grid" id="story-grid-list">
+                <!-- Stories injected by JS -->
+            </div>
+        </section>
+
+        <!-- STORY DETAIL VIEW -->
+        <section id="detail-view" class="app-view" style="display: none;">
+            <div class="back-btn-wrapper">
+                <a href="#home" class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Quay lại trang chủ</a>
+            </div>
+            
+            <div class="story-detail-card">
+                <div class="detail-banner-bg" id="detail-banner-blur"></div>
+                <div class="detail-info-row">
+                    <div class="detail-cover-wrapper">
+                        <img src="" alt="" id="detail-cover">
+                    </div>
+                    <div class="detail-text-col">
+                        <span class="status-badge" id="detail-status">Đang ra</span>
+                        <h1 id="detail-title">Tên Truyện</h1>
+                        <p class="detail-author">Tác giả: <strong id="detail-author">Tác giả</strong></p>
+                        
+                        <div class="detail-stats">
+                            <div class="stat-box">
+                                <span class="stat-val" id="detail-views">0</span>
+                                <span class="stat-lbl">Lượt xem</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-val" id="detail-likes">0</span>
+                                <span class="stat-lbl">Yêu thích</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-val" id="detail-chapters-count">0</span>
+                                <span class="stat-lbl">Chương</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-genres" id="detail-genres">
+                            <!-- Genres badges -->
+                        </div>
+
+                        <div class="detail-actions">
+                            <button class="btn btn-primary" id="detail-first-chapter-btn"><i data-lucide="book-open"></i> Đọc Từ Đầu</button>
+                            <button class="btn btn-secondary" id="detail-bookmark-btn"><i data-lucide="bookmark"></i> Thêm Vào Tủ Sách</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detail-body">
+                    <div class="detail-tabs">
+                        <button class="detail-tab-btn active" data-tab="synopsis">Tóm Tắt Nội Dung</button>
+                        <button class="detail-tab-btn" data-tab="chapters">Danh Sách Chương (<span id="detail-chapters-tab-count">0</span>)</button>
+                    </div>
+                    
+                    <div class="detail-tab-content active" id="tab-synopsis">
+                        <p class="story-description" id="detail-description">Mô tả truyện...</p>
+                    </div>
+                    
+                    <div class="detail-tab-content" id="tab-chapters">
+                        <div class="chapters-order-row">
+                            <span>Danh sách chương:</span>
+                            <button class="btn btn-text-icon btn-sm" id="sort-chapters-btn"><i data-lucide="arrow-up-down"></i> Đảo thứ tự</button>
+                        </div>
+                        <ul class="chapters-list-ul" id="detail-chapters-list">
+                            <!-- Chapters injected by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- READER VIEW -->
+        <section id="reader-view" class="app-view" style="display: none;">
+            <div class="reader-header-nav">
+                <a href="#home" id="reader-back-story-link" class="btn btn-secondary btn-sm"><i data-lucide="arrow-left"></i> Chi Tiết Truyện</a>
+                <div class="reader-settings-toggle">
+                    <button class="btn btn-secondary btn-icon-only btn-sm" id="reader-settings-btn" title="Cấu hình đọc"><i data-lucide="settings"></i></button>
+                </div>
+            </div>
+
+            <!-- Reader Settings Modal Panel -->
+            <div class="reader-settings-panel" id="reader-settings-panel" style="display: none;">
+                <div class="setting-group">
+                    <span class="setting-label">Màu nền:</span>
+                    <div class="theme-options">
+                        <button class="theme-opt theme-dark active" data-theme="dark" title="Tối">Tối</button>
+                        <button class="theme-opt theme-sepia" data-theme="sepia" title="Sepia">Sepia</button>
+                        <button class="theme-opt theme-light" data-theme="light" title="Sáng">Sáng</button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <span class="setting-label">Cỡ chữ:</span>
+                    <div class="font-size-ctrl">
+                        <button class="btn btn-secondary btn-sm" id="font-dec"><i data-lucide="minus"></i></button>
+                        <span id="font-size-display">18px</span>
+                        <button class="btn btn-secondary btn-sm" id="font-inc"><i data-lucide="plus"></i></button>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <span class="setting-label">Phông chữ:</span>
+                    <select id="font-family-select" class="form-input btn-sm">
+                        <option value="sans-serif">Không chân (Inter/Sans)</option>
+                        <option value="serif">Có chân (Playfair/Serif)</option>
+                        <option value="monospace">Đơn cách (Monospace)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="reader-container">
+                <div class="reader-meta">
+                    <h2 class="reader-story-title" id="reader-story-title">Tên Truyện</h2>
+                    <h1 class="reader-chapter-title" id="reader-chapter-title">Chương 1: Tiêu đề chương</h1>
+                    <div class="reader-chapter-meta">
+                        <span><i data-lucide="calendar"></i> Cập nhật: <span id="reader-chapter-date">2026-05-27</span></span>
+                    </div>
+                </div>
+
+                <!-- Navigation Top -->
+                <div class="chapter-nav-row">
+                    <button class="btn btn-secondary btn-prev-chapter"><i data-lucide="chevron-left"></i> Chương trước</button>
+                    <select class="chapter-select form-input" id="reader-chapter-select-top">
+                        <!-- Dropdown chapters list -->
+                    </select>
+                    <button class="btn btn-secondary btn-next-chapter">Chương sau <i data-lucide="chevron-right"></i></button>
+                </div>
+
+                <!-- Reading Content -->
+                <article class="reader-body" id="reader-body-content">
+                    <!-- Content injected by JS -->
+                </article>
+
+                <!-- Navigation Bottom -->
+                <div class="chapter-nav-row bottom-nav">
+                    <button class="btn btn-secondary btn-prev-chapter"><i data-lucide="chevron-left"></i> Chương trước</button>
+                    <select class="chapter-select form-input" id="reader-chapter-select-bottom">
+                        <!-- Dropdown chapters list -->
+                    </select>
+                    <button class="btn btn-secondary btn-next-chapter">Chương sau <i data-lucide="chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKMARKS & HISTORY VIEW -->
+        <section id="bookmarks-view" class="app-view" style="display: none;">
+            <h1 class="page-title"><i data-lucide="bookmark"></i> Tủ Sách Của Tôi</h1>
+            
+            <div class="library-tabs">
+                <button class="library-tab-btn active" data-lib-tab="bookmarks">Truyện Yêu Thích (<span id="bookmark-count">0</span>)</button>
+                <button class="library-tab-btn" data-lib-tab="history">Lịch Sử Đọc</button>
+            </div>
+
+            <!-- Bookmarks Tab Content -->
+            <div class="library-tab-content active" id="lib-tab-bookmarks">
+                <div class="story-grid" id="bookmark-grid-list">
+                    <!-- Bookmarked stories injected by JS -->
+                </div>
+                <div class="empty-state" id="bookmark-empty" style="display: none;">
+                    <i data-lucide="bookmark-x"></i>
+                    <p>Bạn chưa thêm bộ truyện nào vào tủ sách yêu thích.</p>
+                    <a href="#home" class="btn btn-primary btn-sm">Khám phá truyện ngay</a>
+                </div>
+            </div>
+
+            <!-- History Tab Content -->
+            <div class="library-tab-content" id="lib-tab-history">
+                <div class="history-list" id="history-list-container">
+                    <!-- History items injected by JS -->
+                </div>
+                <div class="empty-state" id="history-empty" style="display: none;">
+                    <i data-lucide="history"></i>
+                    <p>Lịch sử đọc của bạn hiện đang trống.</p>
+                    <a href="#home" class="btn btn-primary btn-sm">Đọc truyện ngay</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD VIEW -->
+        <section id="admin-view" class="app-view" style="display: none;">
+            <div class="admin-header-row">
+                <h1 class="page-title"><i data-lucide="settings"></i> Quản Trị Hệ Thống</h1>
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" data-admin-tab="dashboard">Tổng Quan</button>
+                    <button class="admin-tab-btn" data-admin-tab="stories">Quản Lý Truyện</button>
+                    <button class="admin-tab-btn" data-admin-tab="chapters">Quản Lý Chương</button>
+                    <button class="admin-tab-btn" data-admin-tab="github">Đồng Bộ GitHub</button>
+                    <button class="admin-tab-btn" data-admin-tab="backup">Sao Lưu/Reset</button>
+                </div>
+            </div>
+
+            <!-- Admin Overview Dashboard -->
+            <div class="admin-tab-content active" id="admin-tab-dashboard">
+                <div class="github-sync-indicator alert-box alert-warning" id="github-status-banner">
+                    <i data-lucide="alert-circle"></i>
+                    <div>
+                        <strong>Giao diện chạy cục bộ (Chưa cấu hình GitHub):</strong> Mọi thay đổi của bạn hiện chỉ lưu trên trình duyệt của máy này. Hãy cấu hình GitHub để cập nhật trực tiếp lên trang web online cho mọi người cùng xem!
+                    </div>
+                </div>
+
+                <div class="admin-stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-icon sc-blue"><i data-lucide="book"></i></div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-val" id="admin-total-stories">0</span>
+                            <span class="stat-card-lbl">Tổng Số Truyện</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon sc-purple"><i data-lucide="file-text"></i></div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-val" id="admin-total-chapters">0</span>
+                            <span class="stat-card-lbl">Tổng Số Chương</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon sc-green"><i data-lucide="eye"></i></div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-val" id="admin-total-views">0</span>
+                            <span class="stat-card-lbl">Lượt Đọc Hệ Thống</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-icon sc-orange"><i data-lucide="heart"></i></div>
+                        <div class="stat-card-info">
+                            <span class="stat-card-val" id="admin-total-likes">0</span>
+                            <span class="stat-card-lbl">Tổng Số Lượt Thích</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-row-2">
+                    <div class="panel-card flex-2">
+                        <h3 class="panel-title"><i data-lucide="trending-up"></i> Danh sách truyện hiện tại</h3>
+                        <div class="table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ảnh</th>
+                                        <th>Tên truyện</th>
+                                        <th>Tác giả</th>
+                                        <th>Trạng thái</th>
+                                        <th>Số chương</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-dashboard-latest-table">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-card flex-1">
+                        <h3 class="panel-title"><i data-lucide="terminal"></i> Cơ Chế Đăng Truyện Online</h3>
+                        <div class="shortcut-help">
+                            <div class="help-item">
+                                <span class="badge badge-purple">1. Đưa Code Lên GitHub</span>
+                                <p>Tải toàn bộ thư mục web này lên tài khoản GitHub của bạn.</p>
+                            </div>
+                            <div class="help-item">
+                                <span class="badge badge-blue">2. Tạo Token GitHub</span>
+                                <p>Cấp quyền (PAT) để trang web Admin của bạn có thể ghi đè file dữ liệu `stories.json` trực tuyến.</p>
+                            </div>
+                            <div class="help-item">
+                                <span class="badge badge-green">3. Cập nhật Tự động</span>
+                                <p>Khi bạn đăng truyện ở trang Admin, script sẽ gọi GitHub API và ghi đè file `stories.json` trên Github của bạn. Độc giả sẽ thấy truyện mới ngay tức thì!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stories Management -->
+            <div class="admin-tab-content" id="admin-tab-stories">
+                <div class="action-bar">
+                    <div class="search-bar admin-search">
+                        <i data-lucide="search"></i>
+                        <input type="text" id="admin-story-search" placeholder="Tìm kiếm truyện trong quản trị...">
+                    </div>
+                    <button class="btn btn-primary" id="admin-add-story-btn"><i data-lucide="plus"></i> Thêm Truyện Mới</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Ảnh bìa</th>
+                                <th>Tên truyện</th>
+                                <th>Tác giả</th>
+                                <th>Thể loại</th>
+                                <th>Trạng thái</th>
+                                <th>Lượt đọc</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-stories-table-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Chapters Management -->
+            <div class="admin-tab-content" id="admin-tab-chapters">
+                <div class="chapter-selector-box panel-card">
+                    <label for="admin-select-story-for-chapters" class="form-label font-semibold">1. Chọn bộ truyện cần quản lý chương:</label>
+                    <select id="admin-select-story-for-chapters" class="form-input">
+                        <option value="">-- Chọn truyện --</option>
+                        <!-- Options injected by JS -->
+                    </select>
+                </div>
+
+                <div id="admin-chapters-content-box" style="display: none;">
+                    <div class="action-bar mt-6">
+                        <h3 class="panel-title mb-0"><i data-lucide="list"></i> Danh sách chương của <span id="admin-chapter-selected-story-name" class="text-accent"></span></h3>
+                        <button class="btn btn-primary btn-sm" id="admin-add-chapter-btn"><i data-lucide="plus"></i> Thêm Chương Mới</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Số chương</th>
+                                    <th>Tiêu đề chương</th>
+                                    <th>Ngày đăng</th>
+                                    <th>Số từ ước tính</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-chapters-table-body">
+                                <!-- Injected by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Sync Config -->
+            <div class="admin-tab-content" id="admin-tab-github">
+                <div class="panel-card max-w-xl">
+                    <h2 class="panel-title"><i data-lucide="github"></i> Cấu hình kết nối dữ liệu GitHub</h2>
+                    <p class="text-muted mb-4">Cung cấp Token GitHub để trang Admin này trực tiếp gửi yêu cầu lưu trữ và sửa đổi danh sách truyện trên Kho chứa (Repository) GitHub của bạn.</p>
+                    
+                    <form id="github-config-form">
+                        <div class="form-group">
+                            <label for="gh-username" class="form-label">Tên tài khoản GitHub (Username)</label>
+                            <input type="text" id="gh-username" class="form-input" placeholder="Ví dụ: nguyenvanb">
+                        </div>
+                        <div class="form-group">
+                            <label for="gh-repo" class="form-label">Tên Repository (Kho chứa code)</label>
+                            <input type="text" id="gh-repo" class="form-input" placeholder="Ví dụ: web-doc-truyen">
+                        </div>
+                        <div class="form-group">
+                            <label for="gh-token" class="form-label">GitHub Personal Access Token (PAT)</label>
+                            <input type="password" id="gh-token" class="form-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxx">
+                            <small class="text-muted">Token cần có quyền ghi đè tệp tin (quyền <code>contents: write</code>). Mã token này được lưu trữ cục bộ bảo mật trên trình duyệt của bạn.</small>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label for="gh-branch" class="form-label">Nhánh (Branch)</label>
+                                <input type="text" id="gh-branch" class="form-input" value="main">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label for="gh-filename" class="form-label">Tên file dữ liệu</label>
+                                <input type="text" id="gh-filename" class="form-input" value="stories.json" disabled>
+                            </div>
+                        </div>
+
+                        <div class="github-test-row mt-4">
+                            <button type="button" class="btn btn-secondary" id="github-test-btn"><i data-lucide="link"></i> Kiểm tra kết nối</button>
+                            <button type="submit" class="btn btn-primary" id="github-save-btn"><i data-lucide="save"></i> Lưu Cấu Hình</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Backup & Restore -->
+            <div class="admin-tab-content" id="admin-tab-backup">
+                <div class="backup-grid">
+                    <div class="panel-card backup-box text-center">
+                        <div class="backup-icon sc-blue"><i data-lucide="download"></i></div>
+                        <h2>Xuất Dữ Liệu Local (Backup)</h2>
+                        <p class="text-muted mb-6">Tải xuống toàn bộ dữ liệu truyện và chương hiện tại dưới dạng tệp tin cấu hình JSON. Bạn có thể lưu trữ file này trên máy tính cá nhân.</p>
+                        <button class="btn btn-primary" id="admin-export-btn"><i data-lucide="download-cloud"></i> Tải File JSON</button>
+                    </div>
+
+                    <div class="panel-card backup-box text-center">
+                        <div class="backup-icon sc-purple"><i data-lucide="upload"></i></div>
+                        <h2>Nhập Dữ Liệu Đè (Restore)</h2>
+                        <p class="text-muted mb-6">Khôi phục hoặc ghi đè dữ liệu hiện tại bằng tệp tin JSON đã sao lưu trước đó. Lưu ý: Thao tác này sẽ thay thế dữ liệu hiện có trong localStorage.</p>
+                        <div class="file-upload-wrapper mb-4">
+                            <label for="admin-import-file" class="btn btn-secondary">
+                                <i data-lucide="file"></i> Chọn file dữ liệu (.json)
+                            </label>
+                            <input type="file" id="admin-import-file" accept=".json" style="display: none;">
+                            <div class="selected-filename" id="import-filename">Chưa chọn file</div>
+                        </div>
+                        <button class="btn btn-success" id="admin-import-btn" disabled><i data-lucide="upload-cloud"></i> Thực hiện khôi phục</button>
+                    </div>
+
+                    <div class="panel-card backup-box text-center border-danger-glow">
+                        <div class="backup-icon sc-orange"><i data-lucide="alert-triangle"></i></div>
+                        <h2>Khôi Phục Mặc Định</h2>
+                        <p class="text-muted mb-6">Xóa toàn bộ các chỉnh sửa của bạn và thiết lập lại dữ liệu truyện, chương ban đầu của hệ thống. Thao tác này không thể hoàn tác.</p>
+                        <button class="btn btn-danger" id="admin-reset-btn"><i data-lucide="refresh-cw"></i> Reset Về Mặc Định</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 ChữViệtBook. Dự án web đọc truyện và quản lý đăng truyện premium.</p>
+            <p class="footer-note">Được xây dựng bằng HTML, CSS, và Vanilla JS. Chạy hoàn toàn trên trình duyệt client.</p>
+        </div>
+    </footer>
+
+    <!-- STORY FORM MODAL (ADD/EDIT) -->
+    <div class="modal" id="story-modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title" id="story-modal-title">Thêm Truyện Mới</h3>
+                <button class="modal-close" id="story-modal-close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="story-form">
+                    <input type="hidden" id="form-story-id">
+                    
+                    <div class="form-group">
+                        <label for="form-story-title" class="form-label">Tên truyện <span class="text-danger">*</span></label>
+                        <input type="text" id="form-story-title" class="form-input" required placeholder="Ví dụ: Đấu Phá Thương Khung">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="form-story-author" class="form-label">Tác giả <span class="text-danger">*</span></label>
+                            <input type="text" id="form-story-author" class="form-input" required placeholder="Ví dụ: Thiên Tằm Thổ Đậu">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="form-story-status" class="form-label">Trạng thái <span class="text-danger">*</span></label>
+                            <select id="form-story-status" class="form-input" required>
+                                <option value="Đang ra">Đang ra</option>
+                                <option value="Hoàn thành">Hoàn thành</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-story-cover" class="form-label">Đường dẫn ảnh bìa <span class="text-danger">*</span></label>
+                        <div class="cover-input-group">
+                            <input type="text" id="form-story-cover" class="form-input" required placeholder="Ví dụ: covers/dau_pha_thuong_khung.png hoặc link URL ảnh">
+                            <div class="preset-covers">
+                                <button type="button" class="btn btn-sm btn-secondary preset-btn" data-preset="covers/dau_pha_thuong_khung.png">Bìa 1</button>
+                                <button type="button" class="btn btn-sm btn-secondary preset-btn" data-preset="covers/than_dao_dan_ton.png">Bìa 2</button>
+                                <button type="button" class="btn btn-sm btn-secondary preset-btn" data-preset="covers/co_vo_tong_tai.png">Bìa 3</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Thể loại <span class="text-danger">* (Chọn ít nhất một)</span></label>
+                        <div class="genres-checkbox-grid" id="form-story-genres-grid">
+                            <!-- Dynamically loaded genres checkboxes -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-story-description" class="form-label">Tóm tắt nội dung <span class="text-danger">*</span></label>
+                        <textarea id="form-story-description" class="form-input form-textarea" required placeholder="Viết mô tả tóm tắt nội dung bộ truyện ở đây..."></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="story-modal-cancel-btn">Hủy</button>
+                        <button type="submit" class="btn btn-primary" id="story-modal-submit-btn">Lưu truyện</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAPTER FORM MODAL (ADD/EDIT) -->
+    <div class="modal" id="chapter-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title" id="chapter-modal-title">Thêm Chương Mới</h3>
+                <button class="modal-close" id="chapter-modal-close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="chapter-form">
+                    <input type="hidden" id="form-chapter-id">
+                    
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="form-chapter-number" class="form-label">Số thứ tự chương</label>
+                            <input type="number" id="form-chapter-number" class="form-input" disabled placeholder="Tự động tăng">
+                            <small class="text-muted">Hệ thống tự động tăng theo thứ tự chương kế tiếp.</small>
+                        </div>
+                        <div class="form-group flex-2">
+                            <label for="form-chapter-title" class="form-label">Tiêu đề chương <span class="text-danger">*</span></label>
+                            <input type="text" id="form-chapter-title" class="form-input" required placeholder="Ví dụ: Khởi đầu mới (Chương X sẽ tự thêm)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form-chapter-content" class="form-label">Nội dung chương truyện <span class="text-danger">*</span></label>
+                        <textarea id="form-chapter-content" class="form-input form-textarea chapter-textarea" required placeholder="Nhập nội dung chương truyện chữ tại đây. Tách các đoạn bằng cách bấm xuống dòng (phím Enter) để hiển thị đẹp mắt..."></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="chapter-modal-cancel-btn">Hủy</button>
+                        <button type="submit" class="btn btn-primary" id="chapter-modal-submit-btn">Lưu chương</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIRM MODAL (DELETE CONFIRMATION) -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-header">
+                <h3 class="modal-title"><i data-lucide="alert-circle" class="text-danger"></i> Xác nhận xóa</h3>
+                <button class="modal-close" id="confirm-modal-close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-modal-message">Bạn có chắc chắn muốn xóa đối tượng này không? Thao tác này không thể khôi phục.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="confirm-modal-cancel-btn">Hủy</button>
+                <button class="btn btn-danger" id="confirm-modal-confirm-btn">Đồng ý xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
