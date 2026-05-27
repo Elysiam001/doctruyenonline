@@ -608,17 +608,36 @@ function renderStoryDetail(storyId) {
     // Description text
     document.getElementById('detail-description').textContent = story.description;
 
-    // First Chapter Action
+    // First Chapter Action (or Resume Reading)
     const firstChapterBtn = document.getElementById('detail-first-chapter-btn');
     if (story.chapters.length > 0) {
         firstChapterBtn.disabled = false;
-        // Find chapter with minimum number
-        const sortedChapters = [...story.chapters].sort((a, b) => a.number - b.number);
-        firstChapterBtn.onclick = () => {
-            window.location.hash = `#reader/${story.id}/${sortedChapters[0].id}`;
-        };
+        
+        const historyItem = db.history.find(h => h.storyId === story.id);
+        if (historyItem) {
+            const chapter = story.chapters.find(c => c.id === historyItem.chapterId);
+            if (chapter) {
+                firstChapterBtn.innerHTML = `<i data-lucide="book-open"></i> Đọc tiếp Chương ${chapter.number}`;
+                firstChapterBtn.onclick = () => {
+                    window.location.hash = `#reader/${story.id}/${chapter.id}`;
+                };
+            } else {
+                fallbackToFirstChapter();
+            }
+        } else {
+            fallbackToFirstChapter();
+        }
+
+        function fallbackToFirstChapter() {
+            const sortedChapters = [...story.chapters].sort((a, b) => a.number - b.number);
+            firstChapterBtn.innerHTML = `<i data-lucide="book-open"></i> Đọc Ngay`;
+            firstChapterBtn.onclick = () => {
+                window.location.hash = `#reader/${story.id}/${sortedChapters[0].id}`;
+            };
+        }
     } else {
         firstChapterBtn.disabled = true;
+        firstChapterBtn.innerHTML = `<i data-lucide="book-open"></i> Đọc Ngay`;
         firstChapterBtn.onclick = null;
     }
 
@@ -1021,6 +1040,7 @@ function renderAdmin() {
             if (target === 'dashboard') renderAdminDashboard();
             if (target === 'stories') renderAdminStoriesList();
             if (target === 'chapters') renderAdminChaptersSelector();
+            if (target === 'leech') renderAdminLeechConfig();
             if (target === 'github') renderAdminGithubConfig();
         };
     });
@@ -1030,6 +1050,7 @@ function renderAdmin() {
     if (activeSubTab === 'dashboard') renderAdminDashboard();
     if (activeSubTab === 'stories') renderAdminStoriesList();
     if (activeSubTab === 'chapters') renderAdminChaptersSelector();
+    if (activeSubTab === 'leech') renderAdminLeechConfig();
     if (activeSubTab === 'github') renderAdminGithubConfig();
 
     lucide.createIcons();
@@ -1181,12 +1202,16 @@ function renderAdminChaptersList(story) {
             <td>~${wordCount.toLocaleString('vi-VN')} từ</td>
             <td>
                 <div class="actions">
+                    <button class="btn btn-secondary btn-sm btn-icon-only move-up-btn" title="Đẩy lên"><i data-lucide="arrow-up"></i></button>
+                    <button class="btn btn-secondary btn-sm btn-icon-only move-down-btn" title="Đẩy xuống"><i data-lucide="arrow-down"></i></button>
                     <button class="btn btn-secondary btn-sm btn-icon-only edit-chapter-btn" title="Sửa chương"><i data-lucide="edit-3"></i></button>
                     <button class="btn btn-danger btn-sm btn-icon-only delete-chapter-btn" title="Xóa chương"><i data-lucide="trash-2"></i></button>
                 </div>
             </td>
         `;
 
+        tr.querySelector('.move-up-btn').onclick = () => swapChapterOrder(story.id, ch.id, -1);
+        tr.querySelector('.move-down-btn').onclick = () => swapChapterOrder(story.id, ch.id, 1);
         tr.querySelector('.edit-chapter-btn').onclick = () => openChapterModal(story.id, ch);
         tr.querySelector('.delete-chapter-btn').onclick = () => confirmDeleteChapter(story.id, ch.id, ch.title);
 
@@ -1643,7 +1668,193 @@ function confirmDeleteChapter(storyId, chapterId, chapterTitle) {
     );
 }
 
-/* ==========================================
+async function swapChapterOrder(storyId, chapterId, direction) {
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story) return;
+
+    story.chapters.sort((a,b) => a.number - b.number);
+    const currentIndex = story.chapters.findIndex(c => c.id === chapterId);
+    if (currentIndex === -1) return;
+
+    const targetIndex = currentIndex + direction;
+    if (targetIndex < 0 || targetIndex >= story.chapters.length) return; 
+
+    // Swap elements in the array
+    const temp = story.chapters[currentIndex];
+    story.chapters[currentIndex] = story.chapters[targetIndex];
+    story.chapters[targetIndex] = temp;
+
+    // Re-number and re-title
+    story.chapters.forEach((c, idx) => {
+        c.number = idx + 1;
+        c.title = c.title.replace(/^Chương \d+:/, `Chương ${c.number}:`);
+    });
+
+    // Re-render UI immediately for responsiveness
+    renderAdminChaptersList(story);
+    
+    // Save to backend
+    await db.save();
+    showToast("Đã thay đổi thứ tự chương", "success");
+}
+
+/* Sub-Tab: Leech */
+function renderAdminLeechConfig() {
+    const storySelect = document.getElementById('leech-story-id');
+    storySelect.innerHTML = '<option value="">-- Chọn một truyện đã tạo --</option>';
+    db.stories.forEach(s => {
+        storySelect.innerHTML += `<option value="${s.id}">${s.title}</option>`;
+    });
+
+    const leechForm = document.getElementById('leech-form');
+    // Remove existing event listener if any by cloning
+    const newForm = leechForm.cloneNode(true);
+    leechForm.parentNode.replaceChild(newForm, leechForm);
+    
+    newForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const storyId = document.getElementById('leech-story-id').value;
+        const url = document.getElementById('leech-url').value;
+        const count = parseInt(document.getElementById('leech-count').value, 10);
+        
+        startAutoLeech(storyId, url, count);
+    });
+}
+
+async function startAutoLeech(storyId, startUrl, maxCount) {
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story) return;
+
+    const btn = document.getElementById('btn-start-leech');
+    const container = document.getElementById('leech-progress-container');
+    const progressBar = document.getElementById('leech-progress-bar');
+    const logEl = document.getElementById('leech-log');
+
+    btn.disabled = true;
+    btn.innerHTML = `<i data-lucide="loader" class="spin"></i> Đang Cào Truyện...`;
+    lucide.createIcons();
+    container.style.display = 'block';
+    progressBar.style.width = '0%';
+    logEl.innerHTML = '';
+
+    const log = (msg) => {
+        const line = document.createElement('div');
+        line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+        logEl.appendChild(line);
+        logEl.scrollTop = logEl.scrollHeight;
+    };
+
+    let currentUrl = startUrl;
+    let successCount = 0;
+
+    log(`Bắt đầu leech ${maxCount} chương từ: ${currentUrl}`);
+
+    for (let i = 0; i < maxCount; i++) {
+        if (!currentUrl) {
+            log('❌ Không tìm thấy link chương tiếp theo. Dừng lại.');
+            break;
+        }
+
+        log(`Đang tải: ${currentUrl}`);
+        
+        try {
+            // Using allorigins proxy to bypass CORS
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(currentUrl)}`;
+            const response = await fetch(proxyUrl);
+            const data = await response.json();
+            
+            if (!data.contents) throw new Error("Proxy không trả về dữ liệu");
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data.contents, "text/html");
+
+            // Extract Chapter Title
+            let chapterTitle = `Chương ${story.chapters.length + 1}: (Không có tiêu đề)`;
+            const titleEl = doc.querySelector('.chapter-title') || doc.querySelector('h2') || doc.querySelector('h1.txt-primary');
+            if (titleEl) {
+                chapterTitle = titleEl.textContent.trim().replace(/^Chương \d+[\s:\-]+/i, `Chương ${story.chapters.length + 1}: `);
+                if (!chapterTitle.startsWith('Chương')) {
+                    chapterTitle = `Chương ${story.chapters.length + 1}: ${chapterTitle}`;
+                }
+            }
+
+            // Extract Content
+            let contentHtml = '';
+            const contentEl = doc.querySelector('.chapter-c') || doc.querySelector('#chapter-c') || doc.querySelector('#content');
+            if (contentEl) {
+                // Remove scripts and ads inside content
+                contentEl.querySelectorAll('script, style, .ads, div[style*="display:none"], iframe').forEach(e => e.remove());
+                contentHtml = contentEl.innerHTML;
+            } else {
+                log('❌ Không tìm thấy nội dung chương (Có thể trang web này chặn hoặc mã hóa HTML).');
+                break;
+            }
+
+            // Clean up content
+            contentHtml = contentHtml.replace(/<br\s*[\/]?>/gi, '\n');
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = contentHtml;
+            let textContent = tempDiv.textContent.trim();
+            
+            // Format properly
+            let formattedContent = textContent.split('\n')
+                .map(p => p.trim())
+                .filter(p => p.length > 0)
+                .map(p => `<p>${p}</p>`)
+                .join('\n');
+
+            // Save Chapter
+            story.chapters.push({
+                id: 'ch_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                number: story.chapters.length + 1,
+                title: chapterTitle,
+                content: formattedContent,
+                publishDate: new Date().toLocaleDateString('vi-VN')
+            });
+            successCount++;
+
+            // Update Progress
+            const progress = Math.round(((i + 1) / maxCount) * 100);
+            progressBar.style.width = `${progress}%`;
+            log(`✅ Xong: ${chapterTitle}`);
+
+            // Find Next Chapter URL
+            let nextUrl = null;
+            const nextBtn = doc.querySelector('#next_chap') || doc.querySelector('a.next-chap') || doc.querySelector('a.next');
+            if (nextBtn && nextBtn.href && !nextBtn.href.includes('javascript') && !nextBtn.classList.contains('disabled')) {
+                nextUrl = nextBtn.getAttribute('href');
+                // Ensure absolute URL
+                if (nextUrl && !nextUrl.startsWith('http')) {
+                    const urlObj = new URL(currentUrl);
+                    nextUrl = urlObj.origin + (nextUrl.startsWith('/') ? '' : '/') + nextUrl;
+                }
+            }
+            
+            currentUrl = nextUrl;
+
+            // Wait 1-2 seconds between requests to avoid IP ban
+            if (i < maxCount - 1 && currentUrl) {
+                await new Promise(r => setTimeout(r, 1500));
+            }
+        } catch (error) {
+            log(`❌ Lỗi khi tải: ${error.message}`);
+            break;
+        }
+    }
+
+    if (successCount > 0) {
+        log(`🎉 Đã cào thành công ${successCount} chương! Đang lưu dữ liệu...`);
+        await db.save();
+        showToast(`Đã leech thành công ${successCount} chương!`, "success");
+    } else {
+        log(`❌ Quá trình cào thất bại, không có chương nào được lưu.`);
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = `<i data-lucide="download-cloud"></i> Bắt Đầu Leech`;
+    lucide.createIcons();
+}
+
    UTILITY HELPER FUNCTIONS
    ========================================== */
 function showToast(message, type = 'success') {

@@ -287,6 +287,7 @@
                     <button class="admin-tab-btn active" data-admin-tab="dashboard">Tổng Quan</button>
                     <button class="admin-tab-btn" data-admin-tab="stories">Quản Lý Truyện</button>
                     <button class="admin-tab-btn" data-admin-tab="chapters">Quản Lý Chương</button>
+                    <button class="admin-tab-btn" data-admin-tab="leech">Công Cụ Leech <span class="badge" style="background:var(--primary);color:var(--bg);font-size:0.7rem;padding:2px 6px;border-radius:10px;margin-left:5px">Mới</span></button>
                     <button class="admin-tab-btn" data-admin-tab="github">Đồng Bộ GitHub</button>
                     <button class="admin-tab-btn" data-admin-tab="backup">Sao Lưu/Reset</button>
                 </div>
@@ -506,6 +507,48 @@
                         <h2>Khôi Phục Mặc Định</h2>
                         <p class="text-muted mb-6">Xóa toàn bộ các chỉnh sửa của bạn và thiết lập lại dữ liệu truyện, chương ban đầu của hệ thống. Thao tác này không thể hoàn tác.</p>
                         <button class="btn btn-danger" id="admin-reset-btn"><i data-lucide="refresh-cw"></i> Reset Về Mặc Định</button>
+                    </div>
+                </div>
+
+                <!-- LEECH TOOL TAB -->
+                <div class="admin-tab-content" id="admin-tab-leech">
+                    <div class="panel-header mb-6">
+                        <h2>Công cụ Cào Truyện (Auto-Leech)</h2>
+                        <p class="text-muted">Tự động lấy truyện từ TruyenFull về website của bạn.</p>
+                    </div>
+
+                    <div class="panel-card mb-6">
+                        <form id="leech-form">
+                            <div class="form-group">
+                                <label class="form-label">Chọn truyện đích để lưu chương <span class="text-danger">*</span></label>
+                                <select id="leech-story-id" class="form-input" required>
+                                    <option value="">-- Chọn một truyện đã tạo --</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Link Chương 1 (TruyenFull) <span class="text-danger">*</span></label>
+                                <input type="url" id="leech-url" class="form-input" required placeholder="https://truyenfull.vn/ten-truyen/chuong-1/">
+                                <p class="text-muted" style="font-size: 0.85rem; margin-top: 5px;">* Hệ thống sẽ tự động tìm link chương 2, chương 3... để cào tiếp.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Số chương muốn cào (Tối đa 100)</label>
+                                <input type="number" id="leech-count" class="form-input" value="10" min="1" max="100">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" id="btn-start-leech"><i data-lucide="download-cloud"></i> Bắt Đầu Leech</button>
+                        </form>
+                        
+                        <div id="leech-progress-container" class="mt-6" style="display: none;">
+                            <h3 class="mb-4">Tiến trình Leech:</h3>
+                            <div class="progress-bar-container" style="background: var(--bg-hover); height: 20px; border-radius: 10px; overflow: hidden; margin-bottom: 10px;">
+                                <div id="leech-progress-bar" style="background: var(--primary); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                            </div>
+                            <div id="leech-log" class="text-muted" style="font-size: 0.9rem; max-height: 150px; overflow-y: auto; background: var(--bg-hover); padding: 10px; border-radius: 6px; font-family: monospace;">
+                                <!-- Logs will appear here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
