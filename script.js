@@ -1999,19 +1999,16 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-document.addEventListener('contextmenu', (e) => {
-    const readerView = document.getElementById('reader-view');
-    if (readerView && readerView.style.display !== 'none') {
-        e.preventDefault();
-        showToast("Tính năng sao chép đã bị khóa!", "warning");
-    }
-});
-
+// Troll Anti-Copy
 document.addEventListener('copy', (e) => {
     const readerView = document.getElementById('reader-view');
     if (readerView && readerView.style.display !== 'none') {
         e.preventDefault();
-        showToast("Tính năng sao chép đã bị khóa!", "warning");
+        const trollMessage = "Bản Quyền Của Bố Tống Văn Dũng Trộm Con Cặc";
+        if (e.clipboardData) {
+            e.clipboardData.setData('text/plain', trollMessage);
+        }
+        showToast("Đã copy thành công... nhưng mà là copy cái nịt nha! 😂", "warning");
     }
 });
 
