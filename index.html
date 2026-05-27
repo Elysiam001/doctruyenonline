@@ -209,6 +209,8 @@
                         <option value="monospace">Đơn cách (Monospace)</option>
                     </select>
                 </div>
+                <hr style="margin: 10px 0; border-color: var(--border);">
+                <button class="btn btn-primary w-full" id="open-dictionary-btn" style="display: flex; justify-content: center;"><i data-lucide="book-open"></i> Quản Lý Từ Điển</button>
             </div>
 
             <div class="reader-container">
@@ -664,6 +666,39 @@
                         <button type="submit" class="btn btn-primary" id="chapter-modal-submit-btn">Lưu chương</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- DICTIONARY MODAL -->
+    <div class="modal" id="dictionary-modal">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title"><i data-lucide="book-open"></i> Quản Lý Từ Điển Đổi Tên</h3>
+                <button class="modal-close" id="dictionary-modal-close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-secondary mb-4" style="font-size: 0.9rem;">Hệ thống sẽ tự động thay thế "Từ Gốc" thành "Từ Mới" mỗi khi bạn đọc truyện.</p>
+                <form id="dictionary-form" class="dictionary-form" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="dict-original-word" class="form-input" placeholder="Từ gốc (vd: sư phụ)" required style="flex: 1;">
+                    <input type="text" id="dict-replacement-word" class="form-input" placeholder="Từ mới (vd: thầy)" required style="flex: 1;">
+                    <button type="submit" class="btn btn-primary"><i data-lucide="plus"></i> Thêm</button>
+                </form>
+                
+                <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Từ Gốc</th>
+                                <th>Từ Mới</th>
+                                <th style="width: 50px;">Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dictionary-table-body">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

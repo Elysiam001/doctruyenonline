@@ -723,6 +723,9 @@ let currentStoryForScroll = null;
 let currentChapterIndexForScroll = -1;
 let isFetchingNextChapter = false;
 
+// Dictionary State
+let readerDictionary = JSON.parse(localStorage.getItem('readerDictionary')) || [];
+
 function renderReader(storyId, chapterId) {
     const story = db.stories.find(s => s.id === storyId);
     if (!story) {
@@ -747,15 +750,28 @@ function renderReader(storyId, chapterId) {
     document.getElementById('reader-chapter-title').textContent = chapter.title;
     document.getElementById('reader-chapter-date').textContent = chapter.publishDate;
 
+    // Apply dictionary rules
+    let contentText = chapter.content;
+    readerDictionary.forEach(item => {
+        if (item.original && item.replacement) {
+            const escapedOriginal = item.original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            contentText = contentText.replace(new RegExp(escapedOriginal, 'g'), item.replacement);
+        }
+    });
+
     // Body content paragraphs formatting
     const contentContainer = document.getElementById('reader-body-content');
     contentContainer.innerHTML = '';
     
     // Split content by newline and clean empty items
-    const paragraphs = chapter.content.split(/\n+/).map(p => p.trim()).filter(p => p.length > 0);
+    const paragraphs = contentText.split(/\n+/).map(p => p.trim()).filter(p => p.length > 0);
     paragraphs.forEach(p => {
         const pEl = document.createElement('p');
-        pEl.textContent = p;
+        if (p.toLowerCase().startsWith('<p>') && p.toLowerCase().endsWith('</p>')) {
+            pEl.innerHTML = p.substring(3, p.length - 4);
+        } else {
+            pEl.innerHTML = p;
+        }
         contentContainer.appendChild(pEl);
     });
 
@@ -2102,17 +2118,89 @@ function showToast(message, type = 'success') {
     let iconName = 'check';
     if (type === 'error') iconName = 'x-circle';
     if (type === 'warning') iconName = 'alert-triangle';
+    if (type === 'info') iconName = 'info';
 
     toast.innerHTML = `<i data-lucide="${iconName}"></i> <span>${message}</span>`;
     container.appendChild(toast);
     lucide.createIcons();
-
-    // Trigger animation in CSS through creation, then remove
+    
+    // Force reflow
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    
     setTimeout(() => {
-        toast.style.animation = 'toast-in 0.3s reverse forwards';
+        toast.classList.remove('show');
         setTimeout(() => toast.remove(), 300);
-    }, 3500);
+    }, 3000);
 }
+
+/* ==========================================
+   DICTIONARY (NAME REPLACEMENT) LOGIC
+   ========================================== */
+const dictModal = document.getElementById('dictionary-modal');
+
+document.getElementById('open-dictionary-btn').addEventListener('click', () => {
+    document.getElementById('reader-settings-panel').style.display = 'none';
+    renderDictionaryList();
+    dictModal.classList.add('open');
+});
+
+document.getElementById('dictionary-modal-close-btn').addEventListener('click', () => {
+    dictModal.classList.remove('open');
+    // Force re-render of current chapter to apply new dictionary
+    const readerView = document.getElementById('reader-view');
+    if (readerView && readerView.style.display !== 'none') {
+        const storyId = document.getElementById('reader-chapter-select-top').getAttribute('data-story-id') || window.location.hash.split('/')[1];
+        const chapterId = document.getElementById('reader-chapter-select-top').value || window.location.hash.split('/')[2];
+        if (storyId && chapterId) {
+            renderReader(storyId, chapterId);
+        }
+    }
+});
+
+document.getElementById('dictionary-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const original = document.getElementById('dict-original-word').value.trim();
+    const replacement = document.getElementById('dict-replacement-word').value.trim();
+    if (original && replacement) {
+        const existing = readerDictionary.find(item => item.original === original);
+        if (existing) {
+            existing.replacement = replacement;
+        } else {
+            readerDictionary.push({ original, replacement });
+        }
+        localStorage.setItem('readerDictionary', JSON.stringify(readerDictionary));
+        document.getElementById('dict-original-word').value = '';
+        document.getElementById('dict-replacement-word').value = '';
+        renderDictionaryList();
+        showToast("Đã lưu vào từ điển!", "success");
+    }
+});
+
+function renderDictionaryList() {
+    const tbody = document.getElementById('dictionary-table-body');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    readerDictionary.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${item.original}</td>
+            <td><span class="text-accent">${item.replacement}</span></td>
+            <td>
+                <button type="button" class="btn btn-danger btn-icon-only btn-sm" onclick="deleteDictWord(${index})"><i data-lucide="trash-2"></i></button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+    lucide.createIcons();
+}
+
+window.deleteDictWord = (index) => {
+    readerDictionary.splice(index, 1);
+    localStorage.setItem('readerDictionary', JSON.stringify(readerDictionary));
+    renderDictionaryList();
+    showToast("Đã xóa từ!", "warning");
+};
 
 function formatViews(num) {
     if (!num) return 0;
