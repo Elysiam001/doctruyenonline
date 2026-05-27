@@ -1261,6 +1261,16 @@ body.theme-reader-light .btn-secondary {
     border: 1px solid var(--border-color);
     padding: 4px;
     border-radius: var(--radius-md);
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+}
+.admin-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+.admin-tabs::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 2px;
 }
 .admin-tab-btn {
     background: transparent;
@@ -1767,5 +1777,65 @@ body.theme-reader-light .btn-secondary {
     }
     .reader-chapter-title {
         font-size: 1.6rem;
+    }
+}
+
+/* Mobile Screens Optimization (Phones) */
+@media (max-width: 576px) {
+    .main-content {
+        padding: 15px 12px;
+    }
+    .modal-dialog {
+        width: 95%;
+        margin: 10px;
+        border-radius: var(--radius-md);
+    }
+    .modal-body {
+        padding: 16px;
+    }
+    .modal-footer {
+        padding: 12px 16px;
+    }
+    .genres-checkbox-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .admin-header-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    .admin-tabs {
+        margin-top: 5px;
+    }
+    .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .admin-search {
+        width: 100% !important;
+    }
+    .backup-grid {
+        grid-template-columns: 1fr !important;
+    }
+    .admin-stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+    .admin-row-2 {
+        gap: 16px;
+    }
+    .detail-info-row {
+        padding: 20px 10px;
+    }
+    .detail-cover-wrapper img {
+        width: 140px;
+        height: 200px;
+    }
+    .detail-body {
+        padding: 20px;
+    }
+    .detail-stats {
+        gap: 15px;
     }
 }
