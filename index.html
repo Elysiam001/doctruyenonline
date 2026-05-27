@@ -551,23 +551,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Ảnh bìa truyện <span class="text-danger">*</span></label>
-                        
-                        <div class="file-upload-wrapper">
-                            <input type="file" id="form-story-cover-file" accept="image/*" class="file-input-hidden" style="display: none;">
-                            <label for="form-story-cover-file" class="file-upload-label">
-                                <i data-lucide="image-plus"></i> Chọn ảnh từ thiết bị
-                            </label>
-                            <div class="preview-container hidden" id="preview-container">
-                                <img id="form-story-cover-preview" src="" alt="Cover Preview" class="cover-preview">
-                                <button type="button" class="btn-remove-preview" id="btn-remove-preview"><i data-lucide="x"></i></button>
-                            </div>
-                        </div>
-                        
-                        <div class="separator-text" style="text-align: center; margin: 10px 0; color: var(--text-muted); font-size: 0.85rem;">hoặc nhập đường dẫn (URL) thủ công</div>
-                        
+                        <label for="form-story-cover" class="form-label">Đường dẫn ảnh bìa <span class="text-danger">*</span></label>
                         <div class="cover-input-group">
-                            <input type="text" id="form-story-cover" class="form-input" required placeholder="Ví dụ: covers/image.png hoặc link URL ảnh">
+                            <input type="text" id="form-story-cover" class="form-input" required placeholder="Ví dụ: covers/dau_pha_thuong_khung.png hoặc link URL ảnh">
+                            <div class="preset-covers">
+                                <button type="button" class="btn btn-sm btn-secondary preset-btn" data-preset="covers/dau_pha_thuong_khung.png">Bìa 1</button>
+                                <button type="button" class="btn btn-sm btn-secondary preset-btn" data-preset="covers/than_dao_dan_ton.png">Bìa 2</button>
+                                <button type="button" class="btn btn-sm btn-secondary preset-btn" data-preset="covers/co_vo_tong_tai.png">Bìa 3</button>
+                            </div>
                         </div>
                     </div>
 
