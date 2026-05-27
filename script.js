@@ -1240,6 +1240,16 @@ function openStoryModal(story = null) {
         document.getElementById('form-story-author').value = story.author;
         document.getElementById('form-story-status').value = story.status;
         document.getElementById('form-story-cover').value = story.cover;
+        
+        const previewContainer = document.getElementById('preview-container');
+        const previewImg = document.getElementById('form-story-cover-preview');
+        if (story.cover) {
+            previewImg.src = story.cover;
+            previewContainer.classList.remove('hidden');
+        } else {
+            previewContainer.classList.add('hidden');
+        }
+        
         document.getElementById('form-story-description').value = story.description;
 
         // Check the genres checkboxes
@@ -1254,6 +1264,8 @@ function openStoryModal(story = null) {
         titleEl.textContent = `Thêm Truyện Mới`;
         submitEl.innerHTML = `<i data-lucide="plus"></i> Lưu Truyện`;
         document.getElementById('form-story-id').value = "";
+        document.getElementById('preview-container').classList.add('hidden');
+        document.getElementById('form-story-cover-preview').src = "";
     }
 
     storyModal.classList.add('open');
@@ -1264,13 +1276,105 @@ function closeStoryModal() {
     storyModal.classList.remove('open');
 }
 
-// Bind preset cover buttons click
-document.querySelectorAll('.preset-btn').forEach(btn => {
-    btn.onclick = () => {
-        const path = btn.getAttribute('data-preset');
-        document.getElementById('form-story-cover').value = path;
-    };
+// Compress image file
+function compressImage(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                const maxWidth = 400; // max width for covers
+                
+                if (width > maxWidth) {
+                    height = Math.round((height *= maxWidth / width));
+                    width = maxWidth;
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', 0.8));
+            };
+            img.onerror = (err) => reject(err);
+        };
+        reader.onerror = (err) => reject(err);
+    });
+}
+
+// Handle Image Upload
+const fileInput = document.getElementById('form-story-cover-file');
+const previewImg = document.getElementById('form-story-cover-preview');
+const previewContainer = document.getElementById('preview-container');
+const btnRemovePreview = document.getElementById('btn-remove-preview');
+const coverInput = document.getElementById('form-story-cover');
+
+fileInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    // Validate is image
+    if (!file.type.startsWith('image/')) {
+        showToast("Vui lòng chọn một tệp hình ảnh!", "error");
+        return;
+    }
+    
+    showToast("Đang nén ảnh...", "warning");
+    const compressedBase64 = await compressImage(file);
+    
+    previewImg.src = compressedBase64;
+    previewContainer.classList.remove('hidden');
+    
+    if (db.githubConfig && db.githubConfig.token) {
+        showToast("Đang tải ảnh lên máy chủ (GitHub)...", "warning");
+        const filename = `cover_${Date.now()}.jpg`;
+        const base64Content = compressedBase64.split(',')[1];
+        
+        const { username, repo, token, branch } = db.githubConfig;
+        const url = `https://api.github.com/repos/${username}/${repo}/contents/covers/${filename}`;
+        
+        try {
+            const res = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: `Upload cover ${filename}`,
+                    content: base64Content,
+                    branch: branch
+                })
+            });
+            if (res.ok) {
+                showToast("Tải ảnh lên thành công!", "success");
+                coverInput.value = `covers/${filename}`;
+            } else {
+                showToast("Tải ảnh lên thất bại!", "error");
+                coverInput.value = compressedBase64;
+            }
+        } catch(err) {
+            showToast("Lỗi kết nối khi tải ảnh", "error");
+            coverInput.value = compressedBase64;
+        }
+    } else {
+        // Fallback to base64
+        coverInput.value = compressedBase64;
+        showToast("Đã thêm ảnh cục bộ!", "success");
+    }
 });
+
+btnRemovePreview.onclick = () => {
+    fileInput.value = "";
+    previewImg.src = "";
+    previewContainer.classList.add('hidden');
+    coverInput.value = "";
+}
 
 // Bind modals cancel/close buttons
 document.getElementById('story-modal-close-btn').onclick = closeStoryModal;
