@@ -23,7 +23,7 @@
     "genres": [
       "Dị Giới"
     ],
-    "views": 2,
+    "views": 3,
     "likes": 0,
     "chapters": [
       {
@@ -122,6 +122,10 @@
       {
         "original": "Màn đêm buông xuống",
         "replacement": "Trời Tối"
+      },
+      {
+        "original": "Chú thuật thế giới, Tōkyō, một tòa xa lạ trong căn hộ.",
+        "replacement": "Test"
       }
     ]
   },
