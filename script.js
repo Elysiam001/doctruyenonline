@@ -2008,7 +2008,6 @@ document.addEventListener('copy', (e) => {
         if (e.clipboardData) {
             e.clipboardData.setData('text/plain', trollMessage);
         }
-        showToast("Đã copy thành công... nhưng mà là copy cái nịt nha! 😂", "warning");
     }
 });
 
