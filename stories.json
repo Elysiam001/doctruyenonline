@@ -159,7 +159,16 @@
     "cover": "https://via.placeholder.com/300x400.png?text=Ch%C6%B0%C6%A1ng%2014%3A%3A%20Quy%E1%BB%83n%20t%C3%A1c%20th%C4%83m%20d%C3%B2%2C%20%C4%91%E1%BA%B7c%20c%E1%BA%A5p%20Ch%C3%BA%20Thu%E1%BA%ADt%20S%C6%B0%20kh%E1%BA%A3o%20h%E1%BA%A1ch",
     "dictionary": [],
     "genres": [],
-    "chapters": [],
+    "chapters": [
+      {
+        "id": "chap_1779894023858",
+        "title": "Chương Mới",
+        "content": "<p>Đọc trên web để có chất lượng dịch cao và ủng hộ website.</p>",
+        "order": 1,
+        "publishDate": "2026-05-27",
+        "isLocked": false
+      }
+    ],
     "views": 0,
     "likes": 0,
     "status": "Đang ra"
