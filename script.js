@@ -179,29 +179,59 @@ const db = {
         // 1. Load GitHub Config
         const localGH = localStorage.getItem('story_db_github');
         if (localGH) {
-            this.githubConfig = JSON.parse(localGH);
+            try {
+                const parsed = JSON.parse(localGH);
+                if (parsed && parsed.token) {
+                    this.githubConfig = parsed;
+                }
+            } catch (e) {}
         }
 
         // 2. Load Bookmarks & History
         this.bookmarks = JSON.parse(localStorage.getItem('story_db_bookmarks')) || [];
         this.history = JSON.parse(localStorage.getItem('story_db_history')) || [];
 
-        // 3. Load Stories: Try to fetch from remote GitHub repo/server first if running live, or load from localStorage / MockData
+        // 3. Load Stories
         let loadedFromRemote = false;
         try {
-            // Fetch stories.json from relative URL (which gets served by GitHub Pages or local server)
-            const res = await fetch('stories.json');
-            if (res.ok) {
-                const data = await res.json();
-                if (Array.isArray(data) && data.length > 0) {
-                    this.stories = data;
-                    localStorage.setItem('story_db_stories', JSON.stringify(data));
-                    loadedFromRemote = true;
-                    console.log("Successfully loaded database from remote stories.json!");
+            // If Admin, fetch directly from GitHub API to bypass Render/GitHub Pages deployment delay
+            if (this.githubConfig && this.githubConfig.token) {
+                const { username, repo, token, branch } = this.githubConfig;
+                const ghUrl = `https://api.github.com/repos/${username}/${repo}/contents/stories.json?ref=${branch}`;
+                const ghRes = await fetch(ghUrl, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "application/vnd.github.v3+json"
+                    },
+                    cache: "no-store"
+                });
+                if (ghRes.ok) {
+                    const ghData = await ghRes.json();
+                    // Handle unicode properly with Base64 decode
+                    const contentStr = decodeURIComponent(escape(atob(ghData.content)));
+                    const data = JSON.parse(contentStr);
+                    if (Array.isArray(data) && data.length > 0) {
+                        this.stories = data;
+                        localStorage.setItem('story_db_stories', JSON.stringify(data));
+                        loadedFromRemote = true;
+                    }
+                }
+            }
+            
+            // If not admin, or GH fetch failed, fallback to public URL
+            if (!loadedFromRemote) {
+                const res = await fetch('stories.json?t=' + new Date().getTime());
+                if (res.ok) {
+                    const data = await res.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        this.stories = data;
+                        localStorage.setItem('story_db_stories', JSON.stringify(data));
+                        loadedFromRemote = true;
+                    }
                 }
             }
         } catch (e) {
-            console.log("Could not fetch remote stories.json (expected during first local dev run). Fallback to local storage.");
+            console.log("Could not fetch remote stories.json. Fallback to local storage.", e);
         }
 
         if (!loadedFromRemote) {
