@@ -417,7 +417,11 @@
                 <div id="admin-chapters-content-box" style="display: none;">
                     <div class="action-bar mt-6">
                         <h3 class="panel-title mb-0"><i data-lucide="list"></i> Danh sách chương của <span id="admin-chapter-selected-story-name" class="text-accent"></span></h3>
-                        <button class="btn btn-primary btn-sm" id="admin-add-chapter-btn"><i data-lucide="plus"></i> Thêm Chương Mới</button>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="file" id="admin-upload-txt-input" accept=".txt" style="display: none;">
+                            <button class="btn btn-secondary btn-sm" id="admin-upload-txt-btn" title="Tải lên file .txt chứa nhiều chương"><i data-lucide="upload"></i> Tải Lên File .txt</button>
+                            <button class="btn btn-primary btn-sm" id="admin-add-chapter-btn"><i data-lucide="plus"></i> Thêm Chương Mới</button>
+                        </div>
                     </div>
 
                     <div class="table-container">

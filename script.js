@@ -714,9 +714,14 @@ function renderDetailChaptersList(story) {
 /* ==========================================
    RENDER CLIENT: READER VIEW
    ========================================== */
-let readerFontSize = 18; // Default font size in px
-let readerTheme = "dark"; // Default theme
-let readerFontFamily = "sans-serif"; // sans-serif, serif, monospace
+let readerFontSize = parseInt(localStorage.getItem('readerFontSize')) || 18; // Default font size in px
+let readerTheme = localStorage.getItem('readerTheme') || "dark"; // Default theme
+let readerFontFamily = localStorage.getItem('readerFontFamily') || "sans-serif"; // sans-serif, serif, monospace
+
+// Infinite scroll state
+let currentStoryForScroll = null;
+let currentChapterIndexForScroll = -1;
+let isFetchingNextChapter = false;
 
 function renderReader(storyId, chapterId) {
     const story = db.stories.find(s => s.id === storyId);
@@ -818,10 +823,18 @@ function renderReader(storyId, chapterId) {
         });
     }
 
+    // Set scroll state
+    currentStoryForScroll = story;
+    currentChapterIndexForScroll = sortedChapters.findIndex(c => c.id === chapter.id);
+    isFetchingNextChapter = false;
+
     lucide.createIcons();
 }
 
 function applyReaderSettings() {
+    localStorage.setItem('readerFontSize', readerFontSize);
+    localStorage.setItem('readerTheme', readerTheme);
+    localStorage.setItem('readerFontFamily', readerFontFamily);
     // 1. Font size
     const bodyContent = document.getElementById('reader-body-content');
     bodyContent.style.fontSize = `${readerFontSize}px`;
@@ -1416,6 +1429,83 @@ document.getElementById('admin-add-chapter-btn').onclick = () => {
     if (storyId) openChapterModal(storyId);
 };
 
+// Bulk Upload Logic
+document.getElementById('admin-upload-txt-btn').onclick = () => {
+    const storyId = document.getElementById('admin-select-story-for-chapters').value;
+    if (!storyId) return showToast("Vui lòng chọn truyện trước!", "warning");
+    document.getElementById('admin-upload-txt-input').click();
+};
+
+document.getElementById('admin-upload-txt-input').onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    const storyId = document.getElementById('admin-select-story-for-chapters').value;
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story) return;
+
+    showToast("Đang xử lý file, vui lòng chờ...", "success");
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        const text = event.target.result;
+        const chapterRegex = /(?:^|\n)(?:Chương|Chapter)\s+(\d+)[\s:\-]*([^\n]*)/gi;
+        const matches = [...text.matchAll(chapterRegex)];
+        
+        if (matches.length === 0) {
+            e.target.value = '';
+            return showToast("Không tìm thấy từ khóa 'Chương X' trong file!", "error");
+        }
+        
+        let newChaptersCount = 0;
+        let lastMatchIndex = 0;
+        let lastMatchMeta = null;
+        
+        const createChapterFromText = (meta, rawContent) => {
+            let formattedContent = rawContent.split(/\n+/).map(p => p.trim()).filter(p => p.length > 0).map(p => `<p>${p}</p>`).join('\n');
+            if (formattedContent.length === 0) formattedContent = "<p>(Không có nội dung)</p>";
+            const chNum = parseInt(meta.num) || story.chapters.length + 1;
+            let chTitle = `Chương ${chNum}`;
+            if (meta.title) chTitle += `: ${meta.title}`;
+            
+            const existing = story.chapters.find(c => c.number === chNum);
+            if (existing) {
+                existing.title = chTitle;
+                existing.content = formattedContent;
+            } else {
+                story.chapters.push({
+                    id: 'ch_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                    number: chNum,
+                    title: chTitle,
+                    content: formattedContent,
+                    publishDate: new Date().toLocaleDateString('vi-VN')
+                });
+            }
+        };
+
+        matches.forEach((match) => {
+            if (lastMatchMeta) {
+                const content = text.slice(lastMatchIndex, match.index).trim();
+                createChapterFromText(lastMatchMeta, content);
+                newChaptersCount++;
+            }
+            lastMatchMeta = { num: match[1], title: match[2].trim() };
+            lastMatchIndex = match.index + match[0].length;
+        });
+        
+        if (lastMatchMeta) {
+            const content = text.slice(lastMatchIndex).trim();
+            createChapterFromText(lastMatchMeta, content);
+            newChaptersCount++;
+        }
+        
+        db.save();
+        renderAdminChaptersList(storyId);
+        showToast(`Đã tách và tải lên thành công ${newChaptersCount} chương!`);
+        e.target.value = ''; 
+    };
+    reader.readAsText(file);
+};
+
 // Handle Chapter Form Submission
 document.getElementById('chapter-form').onsubmit = async (e) => {
     e.preventDefault();
@@ -1891,6 +1981,103 @@ async function startAutoLeech(storyId, startUrl, maxCount) {
     btn.innerHTML = `<i data-lucide="download-cloud"></i> Bắt Đầu Leech`;
     lucide.createIcons();
 }
+
+/* ==========================================
+   ADVANCED READER FEATURES
+   ========================================== */
+// Keyboard Navigation & Anti-Copy
+document.addEventListener('keydown', (e) => {
+    const readerView = document.getElementById('reader-view');
+    if (readerView && readerView.style.display !== 'none') {
+        if (e.key === 'ArrowLeft') {
+            const prevBtn = document.querySelector('.btn-prev-chapter:not([disabled])');
+            if (prevBtn) prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            const nextBtn = document.querySelector('.btn-next-chapter:not([disabled])');
+            if (nextBtn) nextBtn.click();
+        }
+    }
+});
+
+document.addEventListener('contextmenu', (e) => {
+    const readerView = document.getElementById('reader-view');
+    if (readerView && readerView.style.display !== 'none') {
+        e.preventDefault();
+        showToast("Tính năng sao chép đã bị khóa!", "warning");
+    }
+});
+
+document.addEventListener('copy', (e) => {
+    const readerView = document.getElementById('reader-view');
+    if (readerView && readerView.style.display !== 'none') {
+        e.preventDefault();
+        showToast("Tính năng sao chép đã bị khóa!", "warning");
+    }
+});
+
+// Infinite Scroll
+window.addEventListener('scroll', () => {
+    const readerView = document.getElementById('reader-view');
+    if (readerView && readerView.style.display === 'none') return;
+    
+    // Check if near bottom
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 800) {
+        if (isFetchingNextChapter) return;
+        if (!currentStoryForScroll || currentChapterIndexForScroll < 0) return;
+        
+        const sortedChapters = [...currentStoryForScroll.chapters].sort((a,b) => a.number - b.number);
+        if (currentChapterIndexForScroll >= sortedChapters.length - 1) return;
+        
+        isFetchingNextChapter = true;
+        const nextChapter = sortedChapters[currentChapterIndexForScroll + 1];
+        currentChapterIndexForScroll++;
+        
+        const bodyContent = document.getElementById('reader-body-content');
+        
+        const divider = document.createElement('div');
+        divider.className = 'chapter-divider';
+        divider.innerHTML = `<h3 style="margin-top: 60px; text-align: center; color: var(--primary); font-size: 1.5rem;">${nextChapter.title}</h3><hr style="margin: 20px 0 40px 0; border-color: var(--border); opacity: 0.5;">`;
+        
+        const contentDiv = document.createElement('div');
+        let contentHtml = nextChapter.content;
+        if (!contentHtml.includes('<p>')) {
+            // Clean plain text
+            const paragraphs = contentHtml.split(/\\n+/).map(p => p.trim()).filter(p => p.length > 0);
+            contentHtml = paragraphs.map(p => `<p>${p}</p>`).join('');
+        }
+        contentDiv.innerHTML = contentHtml;
+        
+        bodyContent.appendChild(divider);
+        bodyContent.appendChild(contentDiv);
+        
+        // Update URL silently
+        history.replaceState(null, null, `#reader/${currentStoryForScroll.id}/${nextChapter.id}`);
+        db.addReadingHistory(currentStoryForScroll.id, nextChapter.id);
+        
+        // Update dropdowns
+        document.querySelectorAll('.chapter-select').forEach(sel => {
+            sel.value = nextChapter.id;
+        });
+
+        // Update nav buttons
+        const isLast = currentChapterIndexForScroll >= sortedChapters.length - 1;
+        document.querySelectorAll('.btn-next-chapter').forEach(btn => {
+            btn.disabled = isLast;
+            btn.onclick = isLast ? null : () => {
+                window.location.hash = `#reader/${currentStoryForScroll.id}/${sortedChapters[currentChapterIndexForScroll + 1].id}`;
+            };
+        });
+        document.querySelectorAll('.btn-prev-chapter').forEach(btn => {
+            btn.disabled = false;
+            btn.onclick = () => {
+                window.location.hash = `#reader/${currentStoryForScroll.id}/${sortedChapters[currentChapterIndexForScroll - 1].id}`;
+            };
+        });
+        
+        setTimeout(() => { isFetchingNextChapter = false; }, 800);
+    }
+});
+
 
 /* ==========================================
    UTILITY HELPER FUNCTIONS

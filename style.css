@@ -1122,6 +1122,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.85;
     color: var(--text-primary);
     text-align: justify;
+    user-select: none;
 }
 .reader-body p {
     margin-bottom: 1.6rem;
