@@ -2005,12 +2005,19 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Alt') isAltPressed 
 document.addEventListener('keyup', (e) => { if (e.key === 'Alt') isAltPressed = false; });
 
 document.addEventListener('copy', (e) => {
-    // Cửa sau cho Admin: Giữ nút Alt khi ấn Ctrl+C để copy bình thường
-    if (isAltPressed) return;
-
     const readerView = document.getElementById('reader-view');
     if (readerView && readerView.style.display !== 'none') {
         e.preventDefault();
+
+        // Cửa sau cho Admin: Giữ nút Alt khi ấn Ctrl+C để copy text thuần (không bị dính khung nền đen)
+        if (isAltPressed) {
+            const selectedText = window.getSelection().toString();
+            if (e.clipboardData && selectedText) {
+                e.clipboardData.setData('text/plain', selectedText);
+            }
+            return;
+        }
+
         const trollMessage = "Bản Quyền Của Bố Tống Văn Dũng Trộm Con Cặc";
         if (e.clipboardData) {
             e.clipboardData.setData('text/plain', trollMessage);
