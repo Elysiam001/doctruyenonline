@@ -9,7 +9,7 @@
     "genres": [
       "Dị Giới"
     ],
-    "views": 4,
+    "views": 5,
     "likes": 0,
     "chapters": [
       {
@@ -104,16 +104,7 @@
         "publishDate": "2026-05-27"
       }
     ],
-    "dictionary": [
-      {
-        "original": "Màn đêm buông xuống",
-        "replacement": "Trời Tối"
-      },
-      {
-        "original": "Chú thuật thế giới, Tōkyō, một tòa xa lạ trong căn hộ.",
-        "replacement": "Test"
-      }
-    ]
+    "dictionary": []
   },
   {
     "id": "tong-man-group-chat-the-gioi-huy-diet-moi-khien-cho-ta-toi",
