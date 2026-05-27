@@ -1758,15 +1758,52 @@ async function startAutoLeech(storyId, startUrl, maxCount) {
         log(`Đang tải: ${currentUrl}`);
         
         try {
-            // Using allorigins proxy to bypass CORS
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(currentUrl)}`;
-            const response = await fetch(proxyUrl);
-            const data = await response.json();
+            // Fetch HTML using fallback proxies to avoid rate limits
+            let rawHtml = null;
+            let lastError = null;
             
-            if (!data.contents) throw new Error("Proxy không trả về dữ liệu");
+            const proxies = [
+                {
+                    url: `https://api.allorigins.win/get?url=${encodeURIComponent(currentUrl)}`,
+                    parse: async (res) => {
+                        const data = await res.json();
+                        if (!data.contents) throw new Error("Empty proxy data");
+                        return data.contents;
+                    }
+                },
+                {
+                    url: `https://corsproxy.io/?${encodeURIComponent(currentUrl)}`,
+                    parse: async (res) => await res.text()
+                }
+            ];
+
+            // Try up to 3 times
+            for (let attempt = 0; attempt < 3; attempt++) {
+                if (rawHtml) break;
+                if (attempt > 0) {
+                    log(`⚠️ Đang thử lại (Lần ${attempt + 1}/3)...`);
+                    await new Promise(r => setTimeout(r, 2000));
+                }
+                
+                for (let proxy of proxies) {
+                    try {
+                        const response = await fetch(proxy.url);
+                        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                        const content = await proxy.parse(response);
+                        if (content && content.length > 500) {
+                            rawHtml = content;
+                            break; // Success
+                        }
+                    } catch (e) {
+                        lastError = e;
+                    }
+                }
+            }
+
+            if (!rawHtml) throw lastError || new Error("Các proxy đều bị từ chối");
 
             const parser = new DOMParser();
-            const doc = parser.parseFromString(data.contents, "text/html");
+            const doc = parser.parseFromString(rawHtml, "text/html");
 
             // Extract Chapter Title
             let chapterTitle = `Chương ${story.chapters.length + 1}: (Không có tiêu đề)`;
