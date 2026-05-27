@@ -529,8 +529,17 @@
                         <p class="text-muted mb-4" style="font-size: 0.95rem;">Lách luật chống cào dữ liệu của Sangtacviet bằng cách chạy trực tiếp trên web của họ.</p>
                         <div style="background: var(--bg-hover); padding: 15px; border-radius: 8px; border: 1px dashed var(--border-color); text-align: center;">
                             <p style="margin-bottom: 15px; font-weight: 500;">Kéo thả nút màu xanh bên dưới lên thanh Dấu trang (Bookmark Bar) của Chrome:</p>
-                            <a href="javascript:(function(){var c=document.getElementById('contentcontainer')||document.querySelector('.contentbox');if(!c){alert('Không tìm thấy nội dung truyện!');return;}var cl=c.cloneNode(true);cl.querySelectorAll('script,style,iframe,.ads').forEach(e=>e.remove());var txt=cl.innerText;var ct=document.querySelector('#chapter');var cn=ct?ct.innerText.trim():'Chương Mới';var bt=document.querySelector('#bookname')||document.querySelector('h1');var sn=bt?bt.innerText.trim():document.title.split('-')[0].trim();var d={s:sn,c:cn,txt:txt};var b64=window.btoa(unescape(encodeURIComponent(JSON.stringify(d))));window.open('https://elysiam001.github.io/doctruyenonline/#leechstv='+b64,'_blank');})();" class="btn btn-primary" style="display: inline-block; padding: 10px 20px; font-weight: bold; cursor: grab;" onclick="alert('Kéo thả nút này lên thanh dấu trang nhé sếp, đừng click trực tiếp ở đây! Hãy click OK rồi kéo nó lên thanh Dấu trang (Bookmark Bar) nha!'); return false;"><i data-lucide="magnet"></i> Hút Truyện STV</a>
+                            <a id="leech-bookmarklet-btn" href="#" class="btn btn-primary" style="display: inline-block; padding: 10px 20px; font-weight: bold; cursor: grab;" onclick="alert('Kéo thả nút này lên thanh dấu trang nhé sếp, đừng click trực tiếp ở đây! Hãy click OK rồi kéo nó lên thanh Dấu trang nha!'); return false;"><i data-lucide="magnet"></i> Hút Truyện STV</a>
                             <p class="text-muted mt-4" style="font-size: 0.85rem;">Cách dùng: Vào 1 chương truyện bất kỳ trên trang Sangtacviet, bấm vào Dấu trang này để hút truyện về web của mình.</p>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    const btn = document.getElementById('leech-bookmarklet-btn');
+                                    if (btn) {
+                                        const currentUrl = window.location.origin + window.location.pathname;
+                                        btn.href = `javascript:(function(){var c=document.getElementById('contentcontainer')||document.querySelector('.contentbox');if(!c){alert('Không tìm thấy nội dung truyện!');return;}var cl=c.cloneNode(true);cl.querySelectorAll('script,style,iframe,.ads').forEach(e=>e.remove());var txt=cl.innerText;var ct=document.querySelector('#chapter');var cn=ct?ct.innerText.trim():'Chương Mới';var bt=document.querySelector('#bookname')||document.querySelector('h1');var sn=bt?bt.innerText.trim():document.title.split('-')[0].trim();var d={s:sn,c:cn,txt:txt};var b64=window.btoa(unescape(encodeURIComponent(JSON.stringify(d))));window.open('${currentUrl}#leechstv='+b64,'_blank');})();`;
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
 
