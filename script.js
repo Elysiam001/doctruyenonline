@@ -2018,6 +2018,21 @@ document.addEventListener('keydown', (e) => {
 
 // Troll Anti-Copy with Secret Backdoor
 let isAltPressed = false;
+let titleTapCount = 0;
+let titleTapTimeout;
+let isMobileBackdoorActive = false;
+
+document.getElementById('reader-chapter-title').addEventListener('click', () => {
+    titleTapCount++;
+    clearTimeout(titleTapTimeout);
+    if (titleTapCount >= 5) {
+        isMobileBackdoorActive = !isMobileBackdoorActive;
+        titleTapCount = 0;
+        showToast(isMobileBackdoorActive ? '🔓 Mở khóa sao chép (Cửa sau)' : '🔒 Đã khóa sao chép', 'warning');
+    }
+    titleTapTimeout = setTimeout(() => { titleTapCount = 0; }, 400);
+});
+
 document.addEventListener('keydown', (e) => { if (e.key === 'Alt') isAltPressed = true; });
 document.addEventListener('keyup', (e) => { if (e.key === 'Alt') isAltPressed = false; });
 
@@ -2026,8 +2041,8 @@ document.addEventListener('copy', (e) => {
     if (readerView && readerView.style.display !== 'none') {
         e.preventDefault();
 
-        // Cửa sau cho Admin: Giữ nút Alt khi ấn Ctrl+C để copy text thuần (không bị dính khung nền đen)
-        if (isAltPressed) {
+        // Cửa sau cho Admin: Giữ nút Alt (PC) hoặc gõ 5 lần tiêu đề (Mobile)
+        if (isAltPressed || isMobileBackdoorActive) {
             const selectedText = window.getSelection().toString();
             if (e.clipboardData && selectedText) {
                 e.clipboardData.setData('text/plain', selectedText);
