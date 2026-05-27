@@ -1855,6 +1855,7 @@ async function startAutoLeech(storyId, startUrl, maxCount) {
     lucide.createIcons();
 }
 
+/* ==========================================
    UTILITY HELPER FUNCTIONS
    ========================================== */
 function showToast(message, type = 'success') {
