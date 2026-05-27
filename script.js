@@ -408,6 +408,10 @@ function handleRouting() {
                     author: 'Nguồn: Sangtacviet',
                     description: 'Truyện leech bằng Bookmarklet.',
                     cover: 'https://via.placeholder.com/300x400.png?text=' + encodeURIComponent(data.s),
+                    genres: [],
+                    status: 'Đang ra',
+                    views: 0,
+                    likes: 0,
                     dictionary: [],
                     chapters: []
                 };
