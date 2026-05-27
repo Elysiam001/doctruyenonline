@@ -723,8 +723,7 @@ let currentStoryForScroll = null;
 let currentChapterIndexForScroll = -1;
 let isFetchingNextChapter = false;
 
-// Dictionary State
-let readerDictionary = JSON.parse(localStorage.getItem('readerDictionary')) || [];
+// Dictionary State has been moved to per-story db.stories
 
 function renderReader(storyId, chapterId) {
     const story = db.stories.find(s => s.id === storyId);
@@ -752,12 +751,14 @@ function renderReader(storyId, chapterId) {
 
     // Apply dictionary rules
     let contentText = chapter.content;
-    readerDictionary.forEach(item => {
-        if (item.original && item.replacement) {
-            const escapedOriginal = item.original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            contentText = contentText.replace(new RegExp(escapedOriginal, 'g'), item.replacement);
-        }
-    });
+    if (story.dictionary) {
+        story.dictionary.forEach(item => {
+            if (item.original && item.replacement) {
+                const escapedOriginal = item.original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                contentText = contentText.replace(new RegExp(escapedOriginal, 'g'), item.replacement);
+            }
+        });
+    }
 
     // Body content paragraphs formatting
     const contentContainer = document.getElementById('reader-body-content');
@@ -2135,9 +2136,17 @@ function showToast(message, type = 'success') {
 }
 
 /* ==========================================
-   DICTIONARY (NAME REPLACEMENT) LOGIC
+   DICTIONARY (NAME REPLACEMENT) LOGIC (PER STORY)
    ========================================== */
 const dictModal = document.getElementById('dictionary-modal');
+
+function getActiveStoryId() {
+    const select = document.getElementById('reader-chapter-select-top');
+    if (select && select.getAttribute('data-story-id')) return select.getAttribute('data-story-id');
+    const hashParts = window.location.hash.split('/');
+    if (hashParts[0] === '#reader' && hashParts.length >= 2) return hashParts[1];
+    return null;
+}
 
 document.getElementById('open-dictionary-btn').addEventListener('click', () => {
     document.getElementById('reader-settings-panel').style.display = 'none';
@@ -2150,7 +2159,7 @@ document.getElementById('dictionary-modal-close-btn').addEventListener('click', 
     // Force re-render of current chapter to apply new dictionary
     const readerView = document.getElementById('reader-view');
     if (readerView && readerView.style.display !== 'none') {
-        const storyId = document.getElementById('reader-chapter-select-top').getAttribute('data-story-id') || window.location.hash.split('/')[1];
+        const storyId = getActiveStoryId();
         const chapterId = document.getElementById('reader-chapter-select-top').value || window.location.hash.split('/')[2];
         if (storyId && chapterId) {
             renderReader(storyId, chapterId);
@@ -2162,18 +2171,27 @@ document.getElementById('dictionary-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const original = document.getElementById('dict-original-word').value.trim();
     const replacement = document.getElementById('dict-replacement-word').value.trim();
+    
     if (original && replacement) {
-        const existing = readerDictionary.find(item => item.original === original);
+        const storyId = getActiveStoryId();
+        if (!storyId) return;
+        const story = db.stories.find(s => s.id === storyId);
+        if (!story) return;
+        
+        story.dictionary = story.dictionary || [];
+        const existing = story.dictionary.find(item => item.original === original);
         if (existing) {
             existing.replacement = replacement;
         } else {
-            readerDictionary.push({ original, replacement });
+            story.dictionary.push({ original, replacement });
         }
-        localStorage.setItem('readerDictionary', JSON.stringify(readerDictionary));
+        
+        db.save();
+        
         document.getElementById('dict-original-word').value = '';
         document.getElementById('dict-replacement-word').value = '';
         renderDictionaryList();
-        showToast("Đã lưu vào từ điển!", "success");
+        showToast("Đã lưu vào từ điển truyện!", "success");
     }
 });
 
@@ -2181,13 +2199,19 @@ function renderDictionaryList() {
     const tbody = document.getElementById('dictionary-table-body');
     if (!tbody) return;
     tbody.innerHTML = '';
-    readerDictionary.forEach((item, index) => {
+    
+    const storyId = getActiveStoryId();
+    if (!storyId) return;
+    const story = db.stories.find(s => s.id === storyId);
+    if (!story || !story.dictionary) return;
+    
+    story.dictionary.forEach((item, index) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${item.original}</td>
             <td><span class="text-accent">${item.replacement}</span></td>
             <td>
-                <button type="button" class="btn btn-danger btn-icon-only btn-sm" onclick="deleteDictWord(${index})"><i data-lucide="trash-2"></i></button>
+                <button type="button" class="btn btn-danger btn-icon-only btn-sm" onclick="deleteDictWord('${story.id}', ${index})"><i data-lucide="trash-2"></i></button>
             </td>
         `;
         tbody.appendChild(tr);
@@ -2195,11 +2219,14 @@ function renderDictionaryList() {
     lucide.createIcons();
 }
 
-window.deleteDictWord = (index) => {
-    readerDictionary.splice(index, 1);
-    localStorage.setItem('readerDictionary', JSON.stringify(readerDictionary));
-    renderDictionaryList();
-    showToast("Đã xóa từ!", "warning");
+window.deleteDictWord = (storyId, index) => {
+    const story = db.stories.find(s => s.id === storyId);
+    if (story && story.dictionary) {
+        story.dictionary.splice(index, 1);
+        db.save();
+        renderDictionaryList();
+        showToast("Đã xóa từ!", "warning");
+    }
 };
 
 function formatViews(num) {
