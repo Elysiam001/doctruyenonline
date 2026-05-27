@@ -1749,6 +1749,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 2. Initialise icons
     lucide.createIcons();
 
-    // 3. Start routing
+    // 3. Status Filter Tabs (All, Ongoing, Completed)
+    const statusFilterBtns = document.querySelectorAll('.filter-tab');
+    statusFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            statusFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentStatusFilter = btn.dataset.filter;
+            renderHomeStoriesGrid();
+        });
+    });
+
+    // 4. Start routing
     handleRouting();
 });
