@@ -2026,6 +2026,7 @@ document.addEventListener('copy', (e) => {
 });
 
 // Infinite Scroll
+/*
 window.addEventListener('scroll', () => {
     const readerView = document.getElementById('reader-view');
     if (readerView && readerView.style.display === 'none') return;
@@ -2087,6 +2088,7 @@ window.addEventListener('scroll', () => {
         setTimeout(() => { isFetchingNextChapter = false; }, 800);
     }
 });
+*/
 
 
 /* ==========================================
