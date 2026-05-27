@@ -314,7 +314,8 @@ const gitHubSync = {
         try {
             // 1. Get the existing file's SHA (required by GitHub API to update a file)
             let sha = "";
-            const getFileRes = await fetch(url + `?ref=${branch}&t=${Date.now()}`, {\n                cache: "no-store",
+            const getFileRes = await fetch(url + `?ref=${branch}&t=${Date.now()}`, {
+                cache: "no-store",
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Accept": "application/vnd.github.v3+json"
