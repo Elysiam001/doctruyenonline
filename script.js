@@ -210,7 +210,7 @@ const db = {
                     // Handle unicode properly with Base64 decode
                     const contentStr = decodeURIComponent(escape(atob(ghData.content)));
                     const data = JSON.parse(contentStr);
-                    if (Array.isArray(data) && data.length > 0) {
+                    if (Array.isArray(data)) {
                         this.stories = data;
                         localStorage.setItem('story_db_stories', JSON.stringify(data));
                         loadedFromRemote = true;
@@ -223,7 +223,7 @@ const db = {
                 const res = await fetch('stories.json?t=' + new Date().getTime());
                 if (res.ok) {
                     const data = await res.json();
-                    if (Array.isArray(data) && data.length > 0) {
+                    if (Array.isArray(data)) {
                         this.stories = data;
                         localStorage.setItem('story_db_stories', JSON.stringify(data));
                         loadedFromRemote = true;
