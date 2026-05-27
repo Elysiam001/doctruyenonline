@@ -1,36 +1,5 @@
 [
   {
-    "id": "than-dao-dan-ton",
-    "title": "Thần Đạo Đan Tôn",
-    "author": "Cô Đơn Địa Phi",
-    "cover": "covers/than_dao_dan_ton.png",
-    "description": "Kiếp trước, hắn là tuyệt thế Đan Đế, vì truy cầu võ đạo tối cao mà tạ thế. Kiếp này, hắn sống lại trong thân xác một thiếu niên phế vật, thức tỉnh Thần cấp mạch linh, lấy đan đạo phụ trợ võ đạo, nghiền nát hết thảy thiên tài ngáng đường, ngạo thị thiên hạ!",
-    "genres": [
-      "Huyền Huyễn",
-      "Trọng Sinh",
-      "Đan Dược"
-    ],
-    "status": "Đang ra",
-    "views": 89400,
-    "likes": 6210,
-    "chapters": [
-      {
-        "id": "than-dao-chuong-1",
-        "number": 1,
-        "title": "Chương 1: Đan Đế trùng sinh",
-        "content": "Lăng Hàn mở mắt ra, đập vào mắt là một gian phòng gỗ giản dị nhưng sạch sẽ. Hắn xoa xoa cái đầu đau nhức, ký ức như thủy triều tràn vào trong não bộ.\n\n“Ta... thế mà sống lại sao?”\n\nHắn vốn là Đan Đế danh chấn thiên hạ một vạn năm trước, vì luyện chế một viên đan dược nghịch thiên phá giới mà bị thiên kiếp đánh nát thân xác. Không ngờ linh hồn lại xuyên qua vạn năm thời gian, nhập vào thân xác một thiếu niên mười sáu tuổi cũng tên là Lăng Hàn tại Thương Vân Trấn này.\n\nThân xác này của Lăng Hàn cực kỳ yếu ớt, kinh mạch bế tắc, là một phế vật võ đạo nổi danh trong trấn. Nhưng đối với cựu Đan Đế mà nói, bế tắc kinh mạch thì có là gì? Hắn có vạn ngàn phương pháp để tẩy tủy phạt cốt, cải tử hoàn sinh.\n\n“Đời này, ta không chỉ đứng đầu Đan đạo, mà còn phải leo lên đỉnh phong Võ đạo, nhìn xem phong cảnh nơi tuyệt lộ!” Lăng Hàn nắm chặt tay, ánh mắt lóe lên phong mang sắc bén.",
-        "publishDate": "2026-05-05"
-      },
-      {
-        "id": "than-dao-chuong-2",
-        "number": 2,
-        "title": "Chương 2: Thần cấp mạch linh",
-        "content": "Để bắt đầu tu luyện võ đạo, việc đầu tiên cần làm là câu thông thiên địa để thức tỉnh Mạch Linh. Mạch Linh quyết định tiềm năng tu luyện và thuộc tính sức mạnh của võ giả.\n\nLăng Hàn ngồi xếp bằng trên giường, vận chuyển một môn công pháp cổ xưa tên là 《 Bất Diệt Thiên Kinh 》 mà kiếp trước hắn đạt được tại một di tích viễn cổ nhưng chưa kịp tu luyện.\n\nRầm!\n\nMột tiếng nổ vang vọng trong biển thức hải của hắn. Một luồng ánh sáng vàng kim chói mắt bộc phát ra. Giữa vầng sáng ấy, một bóng hình thần bí chậm rãi hiện ra, tản phát ra uy áp khủng khiếp của thái cổ hồng hoang.\n\n“Đây là... Thần cấp Mạch Linh trong truyền thuyết sao? Không, hình như còn vượt qua cả Thần cấp!” Lăng Hàn chấn động kinh ngạc. Mạch Linh này có hình dạng một cái đỉnh đồng ba chân, trên thân khắc đầy đồ đằng cổ xưa của vạn thú chân linh.",
-        "publishDate": "2026-05-06"
-      }
-    ]
-  },
-  {
     "id": "co-vo-tong-tai-kieu-sa",
     "title": "Cô Vợ Tổng Tài Kiêu Sa Của Tôi",
     "author": "Mai Can Thái Thiếu Bính",
