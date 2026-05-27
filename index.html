@@ -536,7 +536,35 @@
                                     const btn = document.getElementById('leech-bookmarklet-btn');
                                     if (btn) {
                                         const currentUrl = window.location.origin + window.location.pathname;
-                                        btn.href = `javascript:(function(){var c=document.getElementById('contentcontainer')||document.querySelector('.contentbox');if(!c){alert('Không tìm thấy nội dung truyện!');return;}var cl=c.cloneNode(true);cl.querySelectorAll('script,style,iframe,.ads').forEach(e=>e.remove());var txt=cl.innerText;var ct=document.querySelector('#chapter');var cn=ct?ct.innerText.trim():'Chương Mới';var bt=document.querySelector('#bookname')||document.querySelector('h1');var sn=bt?bt.innerText.trim():document.title.split('-')[0].trim();var d={s:sn,c:cn,txt:txt};var b64=window.btoa(unescape(encodeURIComponent(JSON.stringify(d))));window.open('${currentUrl}#leechstv='+b64,'_blank');})();`;
+                                        const script = `javascript:(function(){
+                                            var d_title = document.title || '';
+                                            var sn = d_title.split(/Chương|Chương/i)[0].trim();
+                                            if(!sn || sn.length > 50) sn = 'Truyện Mới';
+                                            
+                                            var h1 = document.querySelector('h1');
+                                            var cn = h1 ? h1.innerText.trim() : 'Chương Mới';
+                                            if(cn.length > 100) cn = cn.substring(0, 100) + '...';
+                                            
+                                            var txt = window.getSelection().toString();
+                                            if(!txt || txt.length < 100) {
+                                                var c = document.getElementById('contentcontainer') || document.querySelector('.contentbox') || document.getElementById('chapter-content');
+                                                if(c) {
+                                                    var cl=c.cloneNode(true);
+                                                    cl.querySelectorAll('script,style,iframe,.ads').forEach(e=>e.remove());
+                                                    txt = cl.innerText;
+                                                }
+                                            }
+                                            
+                                            if(!txt || txt.length < 100) {
+                                                alert('Không tìm thấy nội dung! Sếp hãy BÔI ĐEN (chọn) toàn bộ chữ của chương truyện, sau đó bấm nút này lại nhé!');
+                                                return;
+                                            }
+                                            
+                                            var d={s:sn,c:cn,txt:txt};
+                                            var b64=window.btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+                                            window.open('${currentUrl}#leechstv='+b64,'_blank');
+                                        })();`;
+                                        btn.href = script.replace(/\\n\\s+/g, '');
                                     }
                                 });
                             </script>
