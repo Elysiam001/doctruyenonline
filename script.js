@@ -390,6 +390,64 @@ const gitHubSync = {
    ========================================== */
 function handleRouting() {
     const hash = window.location.hash || '#home';
+    
+    // Xử lý cào truyện từ Bookmarklet Sangtacviet
+    if (hash.startsWith('#leechstv=')) {
+        try {
+            const b64 = hash.replace('#leechstv=', '');
+            const jsonStr = decodeURIComponent(escape(window.atob(b64)));
+            const data = JSON.parse(jsonStr);
+            
+            let story = db.stories.find(st => st.title.toLowerCase() === data.s.toLowerCase());
+            let storyId;
+            if (!story) {
+                storyId = 'leech_' + Date.now();
+                story = {
+                    id: storyId,
+                    title: data.s,
+                    author: 'Nguồn: Sangtacviet',
+                    description: 'Truyện leech bằng Bookmarklet.',
+                    cover: 'https://via.placeholder.com/300x400.png?text=' + encodeURIComponent(data.s),
+                    dictionary: []
+                };
+                db.stories.push(story);
+            } else {
+                storyId = story.id;
+            }
+            
+            db.chapters = db.chapters || [];
+            const existingChap = db.chapters.find(ch => ch.storyId === storyId && ch.title === data.c);
+            let chapterId;
+            if (!existingChap) {
+                chapterId = 'chap_' + Date.now();
+                const formattedContent = data.txt.split('\\n').filter(p => p.trim() !== '').map(p => `<p>${p.trim()}</p>`).join('');
+                const storyChaps = db.chapters.filter(ch => ch.storyId === storyId);
+                const order = storyChaps.length > 0 ? Math.max(...storyChaps.map(ch => ch.order)) + 1 : 1;
+                
+                db.chapters.push({
+                    id: chapterId,
+                    storyId: storyId,
+                    title: data.c,
+                    content: formattedContent,
+                    order: order,
+                    isLocked: false
+                });
+            } else {
+                chapterId = existingChap.id;
+            }
+            
+            db.save();
+            showToast('✅ Đã hút thành công: ' + data.c, 'success');
+            window.location.hash = `#reader/${storyId}/${chapterId}`;
+            return;
+        } catch(e) {
+            console.error('Lỗi khi leech:', e);
+            showToast('Lỗi khi xử lý dữ liệu từ Bookmarklet!', 'danger');
+            window.location.hash = '#home';
+            return;
+        }
+    }
+
     const parts = hash.split('/');
     const view = parts[0];
 
