@@ -14,6 +14,37 @@
     <link rel="stylesheet" href="style.css?v=1.3">
 </head>
 <body>
+
+    <!-- Leech Confirm Modal -->
+    <div id="leech-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2 id="leech-modal-title">Xác Nhận Lưu Truyện Hút</h2>
+                <button class="btn btn-icon-only" id="leech-modal-close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Tên Chương Hút Được</label>
+                    <input type="text" id="leech-chap-title" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Lưu vào Truyện nào?</label>
+                    <select id="leech-story-select" class="form-control">
+                        <!-- Options populated by JS -->
+                    </select>
+                </div>
+                <div class="form-group" id="leech-new-story-group">
+                    <label>Tên Truyện Mới (Nếu chọn Tạo Truyện Mới)</label>
+                    <input type="text" id="leech-new-story-title" class="form-control" placeholder="Nhập tên truyện mới...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="leech-modal-cancel-btn">Hủy Bỏ</button>
+                <button type="button" class="btn btn-primary" id="leech-modal-submit-btn"><i data-lucide="download"></i> Lưu & Đọc Ngay</button>
+            </div>
+        </div>
+    </div>
+
     <div class="app-wrapper">
     <!-- App Background Glows -->
     <div class="bg-glow bg-glow-1"></div>

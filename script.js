@@ -398,54 +398,14 @@ function handleRouting() {
             const jsonStr = decodeURIComponent(escape(window.atob(b64)));
             const data = JSON.parse(jsonStr);
             
-            let story = db.stories.find(st => st.title.toLowerCase() === data.s.toLowerCase());
-            let storyId;
-            if (!story) {
-                storyId = 'leech_' + Date.now();
-                story = {
-                    id: storyId,
-                    title: data.s,
-                    author: 'Nguồn: Sangtacviet',
-                    description: 'Truyện leech bằng Bookmarklet.',
-                    cover: 'https://via.placeholder.com/300x400.png?text=' + encodeURIComponent(data.s),
-                    genres: [],
-                    status: 'Đang ra',
-                    views: 0,
-                    likes: 0,
-                    dictionary: [],
-                    chapters: []
-                };
-                db.stories.push(story);
-            } else {
-                storyId = story.id;
-                if (!story.chapters) story.chapters = [];
-            }
+            window.location.hash = '#home'; // Xoá hash để không bị lặp lại khi F5
             
-            const existingChap = story.chapters.find(ch => ch.title === data.c);
-            let chapterId;
-            if (!existingChap) {
-                chapterId = 'chap_' + Date.now();
-                const formattedContent = data.txt.split('\\n').filter(p => p.trim() !== '').map(p => `<p>${p.trim()}</p>`).join('');
-                const order = story.chapters.length > 0 ? Math.max(...story.chapters.map(ch => ch.order || 0)) + 1 : 1;
-                
-                const today = new Date();
-                const dateStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
-                
-                story.chapters.push({
-                    id: chapterId,
-                    title: data.c,
-                    content: formattedContent,
-                    order: order,
-                    publishDate: dateStr,
-                    isLocked: false
-                });
+            // Mở bảng Xác nhận Lưu Chương
+            if(typeof openLeechConfirmModal === 'function') {
+                openLeechConfirmModal(data);
             } else {
-                chapterId = existingChap.id;
+                showToast('Không tìm thấy hàm xử lý giao diện Hút Truyện!', 'danger');
             }
-            
-            db.save();
-            showToast('✅ Đã hút thành công: ' + data.c, 'success');
-            window.location.hash = `#reader/${storyId}/${chapterId}`;
             return;
         } catch(e) {
             console.error('Lỗi khi leech:', e);
@@ -2405,4 +2365,113 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // 4. Start routing
     handleRouting();
+});
+
+
+/* ==========================================
+   LEECH CONFIRM MODAL LOGIC
+   ========================================== */
+let currentLeechData = null;
+
+function openLeechConfirmModal(data) {
+    currentLeechData = data;
+    const modal = document.getElementById('leech-modal');
+    const chapTitleInput = document.getElementById('leech-chap-title');
+    const storySelect = document.getElementById('leech-story-select');
+    const newStoryGroup = document.getElementById('leech-new-story-group');
+    const newStoryInput = document.getElementById('leech-new-story-title');
+
+    chapTitleInput.value = data.c || 'Chương Mới';
+    newStoryInput.value = data.s || 'Truyện Mới';
+
+    storySelect.innerHTML = '<option value="NEW_STORY" style="font-weight:bold; color:var(--primary-color);">+ Tạo Truyện Mới</option>';
+    let matchedStoryId = 'NEW_STORY';
+
+    db.stories.forEach(st => {
+        const opt = document.createElement('option');
+        opt.value = st.id;
+        opt.textContent = st.title;
+        storySelect.appendChild(opt);
+
+        if (st.title.toLowerCase().trim() === (data.s || '').toLowerCase().trim()) {
+            matchedStoryId = st.id;
+        }
+    });
+
+    storySelect.value = matchedStoryId;
+
+    storySelect.onchange = () => {
+        if (storySelect.value === 'NEW_STORY') {
+            newStoryGroup.style.display = 'block';
+        } else {
+            newStoryGroup.style.display = 'none';
+        }
+    };
+    storySelect.onchange(); // trigger logic
+
+    modal.classList.add('open');
+}
+
+function closeLeechConfirmModal() {
+    document.getElementById('leech-modal').classList.remove('open');
+    currentLeechData = null;
+}
+
+document.getElementById('leech-modal-close-btn')?.addEventListener('click', closeLeechConfirmModal);
+document.getElementById('leech-modal-cancel-btn')?.addEventListener('click', closeLeechConfirmModal);
+
+document.getElementById('leech-modal-submit-btn')?.addEventListener('click', () => {
+    if (!currentLeechData) return;
+
+    const chapTitleInput = document.getElementById('leech-chap-title');
+    const storySelect = document.getElementById('leech-story-select');
+    const newStoryInput = document.getElementById('leech-new-story-title');
+
+    const selectedStoryId = storySelect.value;
+    const finalChapTitle = chapTitleInput.value.trim();
+    let storyId;
+
+    if (selectedStoryId === 'NEW_STORY') {
+        const finalStoryTitle = newStoryInput.value.trim() || 'Truyện Mới';
+        storyId = 'leech_' + Date.now();
+        const story = {
+            id: storyId,
+            title: finalStoryTitle,
+            author: 'Nguồn: Sangtacviet',
+            description: 'Truyện leech bằng Bookmarklet.',
+            cover: 'https://via.placeholder.com/300x400.png?text=' + encodeURIComponent(finalStoryTitle),
+            genres: [],
+            status: 'Đang ra',
+            views: 0,
+            likes: 0,
+            dictionary: [],
+            chapters: []
+        };
+        db.stories.push(story);
+    } else {
+        storyId = selectedStoryId;
+    }
+
+    const story = db.stories.find(st => st.id === storyId);
+    if (!story.chapters) story.chapters = [];
+
+    const chapterId = 'chap_' + Date.now();
+    const formattedContent = currentLeechData.txt.split('\n').filter(p => p.trim() !== '').map(p => `<p>${p.trim()}</p>`).join('');
+    const order = story.chapters.length > 0 ? Math.max(...story.chapters.map(ch => ch.order || 0)) + 1 : 1;
+    const today = new Date();
+    const dateStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+    story.chapters.push({
+        id: chapterId,
+        title: finalChapTitle,
+        content: formattedContent,
+        order: order,
+        publishDate: dateStr,
+        isLocked: false
+    });
+
+    db.save();
+    closeLeechConfirmModal();
+    showToast('✅ Đã lưu chương thành công!', 'success');
+    window.location.hash = `#reader/${storyId}/${chapterId}`;
 });
