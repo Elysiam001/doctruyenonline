@@ -1,5 +1,19 @@
 [
   {
+    "id": "tai-khoan-game",
+    "title": "Tài khoản Game",
+    "author": "Dũng",
+    "status": "Đang ra",
+    "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNUKpeup49CpoAU8Khd6PXoYt0Fd1nfVvhOz6SQlLNVQ&s",
+    "description": "Tài Khoản Game Liên Quân",
+    "genres": [
+      "Lịch Sử"
+    ],
+    "views": 0,
+    "likes": 0,
+    "chapters": []
+  },
+  {
     "id": "nguoi-o-tinh-thiet-ai-noi-cac-nang-chi-la-npc",
     "title": "Người ở tinh thiết, ai nói các nàng chỉ là NPC",
     "author": "Tiểu Admin",
@@ -9,7 +23,7 @@
     "genres": [
       "Dị Giới"
     ],
-    "views": 2,
+    "views": 3,
     "likes": 0,
     "chapters": [
       {
